@@ -330,6 +330,28 @@ export default function App() {
       {/* PWA Install Toast */}
       <PwaInstallToast show={!showStartScreen} />
 
+      {/* Shuffle Button */}
+      {!showStartScreen && (
+        <button
+          className="fixed left-6 top-[32px] text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
+          style={{ lineHeight: 0, padding: '4px' }}
+          onClick={() => {
+            const total = DRINK_REGISTRY.length;
+            let idx;
+            do { idx = Math.floor(Math.random() * total); } while (idx === centerIndex && total > 1);
+            navigateTo(idx);
+          }}
+          aria-label="Shuffle"
+        >
+          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.635254 10.7524H2.93817C3.74327 10.7524 4.51254 10.4196 5.06369 9.83269L11.2091 3.28901C11.7602 2.70214 12.5295 2.36926 13.3346 2.36926H15.9437" stroke="currentColor" strokeWidth="1.09346" strokeLinecap="round"/>
+            <path d="M14.3035 0.546875L16.2303 1.75114C16.6871 2.03665 16.6871 2.70196 16.2303 2.98747L14.3035 4.19174" stroke="currentColor" strokeWidth="1.09346" strokeLinecap="round"/>
+            <path d="M0.552246 1.95361H2.87819C3.69134 1.95361 4.46831 2.28982 5.02497 2.88256L11.2318 9.49168C11.7885 10.0844 12.5654 10.4206 13.3786 10.4206H16.0137" stroke="currentColor" strokeWidth="1.10439" strokeLinecap="round"/>
+            <path d="M14.3572 12.2615L16.3033 11.0452C16.7647 10.7568 16.7647 10.0848 16.3033 9.79647L14.3572 8.58016" stroke="currentColor" strokeWidth="1.10439" strokeLinecap="round"/>
+          </svg>
+        </button>
+      )}
+
       {/* Main App */}
       {!showStartScreen && (
         <div className="relative w-full h-full flex flex-col">
