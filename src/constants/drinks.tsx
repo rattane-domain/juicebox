@@ -109,18 +109,18 @@ export const DRINK_REGISTRY: DrinkDefinition[] = [
   {
     id: 'martini',
     name: 'martini',
-    displayName: 'Martini',
-    activeSvg: <MartiniActive />,
-    passiveSvg: <MartiniPassive />,
-    loadingSvg: <MartiniLoading />
-  },
-  {
-    id: 'sprudel',
-    name: 'sprudel',
     displayName: 'Sprudel',
     activeSvg: <SprudelActive />,
     passiveSvg: <SprudelPassive />,
     loadingSvg: <SprudelLoading />
+  },
+  {
+    id: 'sprudel',
+    name: 'sprudel',
+    displayName: 'Martini',
+    activeSvg: <MartiniActive />,
+    passiveSvg: <MartiniPassive />,
+    loadingSvg: <MartiniLoading />
   },
   {
     id: 'wasser',
@@ -281,18 +281,18 @@ export const DRINK_REGISTRY: DrinkDefinition[] = [
   {
     id: 'whisky',
     name: 'whisky',
-    displayName: 'Whisky',
-    activeSvg: <WhiskyActive />,
-    passiveSvg: <WhiskyPassive />,
-    loadingSvg: <WhiskyLoading />
-  },
-  {
-    id: 'milkandhoney',
-    name: 'milkandhoney',
     displayName: 'Milk & Honey',
     activeSvg: <MilchActive />,
     passiveSvg: <MilchPassive />,
     loadingSvg: <MilchLoading />
+  },
+  {
+    id: 'milkandhoney',
+    name: 'milkandhoney',
+    displayName: 'Whisky',
+    activeSvg: <WhiskyActive />,
+    passiveSvg: <WhiskyPassive />,
+    loadingSvg: <WhiskyLoading />
   }
 ];
 
