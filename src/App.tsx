@@ -62,6 +62,9 @@ export default function App() {
   // Hint for passive drinks
   const [showTapHint, setShowTapHint] = useState(false);
 
+  // View mode: carousel (default) or grid
+  const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
+
   // Player (one audio element, simple)
   // ✅ v16.1: Pass ref instead of state to fix race condition
   const {
@@ -243,6 +246,28 @@ export default function App() {
     console.log('⚠️ Center tap ignored (not ready)');
   };
 
+  const handleShuffle = async () => {
+    const total = DRINK_REGISTRY.length;
+    let idx;
+    do { idx = Math.floor(Math.random() * total); } while (idx === centerIndex && total > 1);
+    navigateTo(idx);
+    if (userInteracted) {
+      setLoadingDrinkIndex(idx);
+      await activateDrink(idx);
+      setLoadingDrinkIndex(null);
+    }
+  };
+
+  const handleGridTap = async (index: number) => {
+    navigateTo(index);
+    setViewMode('carousel');
+    if (userInteracted) {
+      setLoadingDrinkIndex(index);
+      await activateDrink(index);
+      setLoadingDrinkIndex(null);
+    }
+  };
+
   // Initialize mobile debugging
   useEffect(() => {
     initMobileDebugging();
@@ -335,12 +360,7 @@ export default function App() {
         <button
           className="fixed left-6 top-[32px] z-50 text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
           style={{ lineHeight: 0, padding: '4px' }}
-          onClick={() => {
-            const total = DRINK_REGISTRY.length;
-            let idx;
-            do { idx = Math.floor(Math.random() * total); } while (idx === centerIndex && total > 1);
-            navigateTo(idx);
-          }}
+          onClick={handleShuffle}
           aria-label="Shuffle"
         >
           <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -349,6 +369,31 @@ export default function App() {
             <path d="M0.552246 1.95361H2.87819C3.69134 1.95361 4.46831 2.28982 5.02497 2.88256L11.2318 9.49168C11.7885 10.0844 12.5654 10.4206 13.3786 10.4206H16.0137" stroke="currentColor" strokeWidth="1.10439" strokeLinecap="round"/>
             <path d="M14.3572 12.2615L16.3033 11.0452C16.7647 10.7568 16.7647 10.0848 16.3033 9.79647L14.3572 8.58016" stroke="currentColor" strokeWidth="1.10439" strokeLinecap="round"/>
           </svg>
+        </button>
+      )}
+
+      {/* View Toggle Button (bottom-left) */}
+      {!showStartScreen && (
+        <button
+          className="fixed left-6 bottom-8 z-50 text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
+          style={{ lineHeight: 0, padding: '4px' }}
+          onClick={() => setViewMode(v => v === 'carousel' ? 'grid' : 'carousel')}
+          aria-label="View wechseln"
+        >
+          {viewMode === 'carousel' ? (
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 12 0)" fill="currentColor"/>
+              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 4 0)" fill="currentColor"/>
+              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 12 8)" fill="currentColor"/>
+              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 4 8)" fill="currentColor"/>
+            </svg>
+          ) : (
+            <svg width="20" height="4" viewBox="0 0 20 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2" fill="currentColor"/>
+              <circle cx="10" cy="2" r="2" fill="currentColor"/>
+              <circle cx="18" cy="2" r="2" fill="currentColor"/>
+            </svg>
+          )}
         </button>
       )}
 
@@ -372,8 +417,38 @@ export default function App() {
             upcomingIsLoading={isLoading && loadingDrinkIndex === centerIndex}
           />
 
+          {/* Grid View */}
+          {viewMode === 'grid' && (
+            <div className="absolute inset-0 overflow-y-auto" style={{ paddingTop: 72, paddingBottom: 80 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '28px 16px', padding: '0 20px' }}>
+                {DRINK_REGISTRY.map((drink, index) => {
+                  const station = getDrinkStationConfig(drink.id);
+                  const isActive = index === activeDrinkIndex && !isMuted;
+                  const isThisLoading = index === loadingDrinkIndex;
+                  return (
+                    <button
+                      key={drink.id}
+                      onClick={() => handleGridTap(index)}
+                      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      <div style={{ width: 72, height: 120 }}>
+                        <DrinkIcon drinkId={drink.id} isActive={isActive} isLoading={isThisLoading} isPlaying={isActive} />
+                      </div>
+                      <div
+                        className="font-['Pathway_Extreme',sans-serif] text-[12px] text-[#9c9c9c] dark:text-[#CBCBCB] text-center"
+                        style={{ fontVariationSettings: "'wdth' 100", lineHeight: 1.3 }}
+                      >
+                        {station?.name}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Carousel V2 - Absolutely centered, independent of header/footer */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ display: viewMode === 'grid' ? 'none' : 'flex' }}>
             <div className="w-full h-full flex items-center justify-center pointer-events-auto">
               <DrinkCarouselV2
                 centerIndex={centerIndex}
@@ -392,7 +467,7 @@ export default function App() {
           </div>
 
           {/* Hints below carousel (Tap Hint / Sleep Timer) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ display: viewMode === 'grid' ? 'none' : 'flex' }}>
             <div className="flex flex-col items-center justify-center">
               {/* Spacer for carousel height + 140px distance */}
               <div style={{ height: '90px' }} />
