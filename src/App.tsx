@@ -412,7 +412,7 @@ export default function App() {
       {!showStartScreen && (
         <button
           className="fixed left-6 bottom-8 z-50 text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
-          style={{ lineHeight: 0, padding: '4px' }}
+          style={{ lineHeight: 0, padding: '16px' }}
           onClick={() => setViewMode(v => v === 'carousel' ? 'grid' : 'carousel')}
           aria-label="View wechseln"
         >
@@ -457,7 +457,6 @@ export default function App() {
           {viewMode === 'grid' && (
             <DrinkGridView
               activeDrinkIndex={activeDrinkIndex}
-              loadingDrinkIndex={loadingDrinkIndex}
               isMuted={isMuted}
               onDrinkTap={handleGridTap}
             />
