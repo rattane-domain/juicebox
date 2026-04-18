@@ -95,10 +95,12 @@ export default function DrinkCarouselV2({
     
     const clickX = event.clientX;
     const screenWidth = window.innerWidth;
-    
-    const leftZone = screenWidth * 0.33;
-    const rightZone = screenWidth * 0.67;
-    
+    const screenCenter = screenWidth / 2;
+    // On mobile ~17% of screen (~127px), capped at 90px on wider screens
+    const centerHalf = Math.min(screenWidth * 0.17, 90);
+    const leftZone = screenCenter - centerHalf;
+    const rightZone = screenCenter + centerHalf;
+
     if (clickX < leftZone) {
       console.log('👈 Tap left zone');
       onSwipeRight();
