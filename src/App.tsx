@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // NEW V2: Physical carousel with iOS-style wheel and improved tap timing
 import DrinkCarouselV2 from './components/DrinkCarouselV2';
+import DrinkIcon from './components/DrinkIcon';
 // LEGACY: Old carousel (can be deleted once V2 is stable)
 // import SimpleCarousel from './components/SimpleCarousel';
 import StartScreen from './components/StartScreen';
