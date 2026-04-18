@@ -333,7 +333,7 @@ export default function App() {
       {/* Shuffle Button */}
       {!showStartScreen && (
         <button
-          className="fixed left-6 top-[32px] text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
+          className="fixed left-6 top-[32px] z-50 text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
           style={{ lineHeight: 0, padding: '4px' }}
           onClick={() => {
             const total = DRINK_REGISTRY.length;
