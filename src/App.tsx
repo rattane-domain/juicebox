@@ -211,6 +211,9 @@ export default function App() {
 
   // Handle center drink tap
   const handleCenterTap = async () => {
+    // Don't allow center tap during shuffle animation
+    if (isShufflingRef.current) return;
+
     // Don't allow center tap during animation (swipes should work, but not center tap)
     if (isAnimating) {
       console.log('⚠️ Center tap ignored (carousel animating)');
@@ -258,33 +261,34 @@ export default function App() {
     let target;
     do { target = Math.floor(Math.random() * total); } while (target === centerIndexRef.current && total > 1);
 
-    // Steps: 1 full rotation + distance to target (always spin forward/left)
-    const stepsToTarget = ((target - centerIndexRef.current + total) % total) || total;
+    // Distance to target, ensure at least 3 steps for the slow phase
+    let stepsToTarget = ((target - centerIndexRef.current + total) % total) || total;
+    if (stepsToTarget < 3) stepsToTarget += total;
     const totalSteps = total + stepsToTarget;
 
-    // Delays: fast → slow, like a slot machine winding down
+    // All steps at 60ms except last 3 which slow down like a slot machine
     const delays = Array.from({ length: totalSteps }, (_, i) => {
-      const t = i / totalSteps;
-      if (t < 0.35) return 55;
-      if (t < 0.62) return 110;
-      if (t < 0.80) return 210;
-      if (t < 0.92) return 370;
-      return 540;
+      if (i === totalSteps - 3) return 140;
+      if (i === totalSteps - 2) return 290;
+      if (i === totalSteps - 1) return 480;
+      return 60;
     });
 
     let step = 0;
     const tick = () => {
-      const next = (centerIndexRef.current + 1) % total;
-      navigateTo(next);
+      navigateTo((centerIndexRef.current + 1) % total);
       step++;
       if (step < totalSteps) {
         setTimeout(tick, delays[step]);
       } else {
-        // Landed — now load and play
-        isShufflingRef.current = false;
+        // Landed — load and play (keep isShufflingRef true until done to block handleCenterTap)
         if (userInteracted) {
           setLoadingDrinkIndex(target);
-          activateDrink(target).then(() => setLoadingDrinkIndex(null));
+          activateDrink(target)
+            .then(() => setLoadingDrinkIndex(null))
+            .finally(() => { isShufflingRef.current = false; });
+        } else {
+          isShufflingRef.current = false;
         }
       }
     };
