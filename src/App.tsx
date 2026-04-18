@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // NEW V2: Physical carousel with iOS-style wheel and improved tap timing
 import DrinkCarouselV2 from './components/DrinkCarouselV2';
-import DrinkIcon from './components/DrinkIcon';
+import DrinkGridView from './components/DrinkGridView';
 // LEGACY: Old carousel (can be deleted once V2 is stable)
 // import SimpleCarousel from './components/SimpleCarousel';
 import StartScreen from './components/StartScreen';
@@ -261,7 +261,6 @@ export default function App() {
 
   const handleGridTap = async (index: number) => {
     navigateTo(index);
-    setViewMode('carousel');
     if (userInteracted) {
       setLoadingDrinkIndex(index);
       await activateDrink(index);
@@ -418,34 +417,14 @@ export default function App() {
             upcomingIsLoading={isLoading && loadingDrinkIndex === centerIndex}
           />
 
-          {/* Grid View */}
+          {/* Grid View (experiment) — remove this block to disable */}
           {viewMode === 'grid' && (
-            <div className="absolute inset-0 overflow-y-auto" style={{ paddingTop: 72, paddingBottom: 80 }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '28px 16px', padding: '0 20px' }}>
-                {DRINK_REGISTRY.map((drink, index) => {
-                  const station = getDrinkStationConfig(drink.id);
-                  const isActive = index === activeDrinkIndex && !isMuted;
-                  const isThisLoading = index === loadingDrinkIndex;
-                  return (
-                    <button
-                      key={drink.id}
-                      onClick={() => handleGridTap(index)}
-                      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer' }}
-                    >
-                      <div style={{ width: 72, height: 120 }}>
-                        <DrinkIcon drinkId={drink.id} isActive={isActive} isLoading={isThisLoading} isPlaying={isActive} />
-                      </div>
-                      <div
-                        className="font-['Pathway_Extreme',sans-serif] text-[12px] text-[#9c9c9c] dark:text-[#CBCBCB] text-center"
-                        style={{ fontVariationSettings: "'wdth' 100", lineHeight: 1.3 }}
-                      >
-                        {station?.name}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <DrinkGridView
+              activeDrinkIndex={activeDrinkIndex}
+              loadingDrinkIndex={loadingDrinkIndex}
+              isMuted={isMuted}
+              onDrinkTap={handleGridTap}
+            />
           )}
 
           {/* Carousel V2 - Absolutely centered, independent of header/footer */}
