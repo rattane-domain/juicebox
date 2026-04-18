@@ -258,14 +258,18 @@ export default function App() {
     isShufflingRef.current = true;
 
     const total = DRINK_REGISTRY.length;
+    const startIndex = centerIndexRef.current;
     let target;
-    do { target = Math.floor(Math.random() * total); } while (target === centerIndexRef.current && total > 1);
+    do { target = Math.floor(Math.random() * total); } while (target === startIndex && total > 1);
 
     // Half rotation as base, plus steps to target (max ~1.5 rotations)
     const half = Math.ceil(total / 2);
-    let stepsToTarget = ((target - centerIndexRef.current + total) % total) || half;
+    let stepsToTarget = ((target - startIndex + total) % total) || half;
     if (stepsToTarget < 3) stepsToTarget += half;
     const totalSteps = half + stepsToTarget;
+
+    // The carousel advances totalSteps positions from startIndex — that's what actually plays
+    const landingIndex = (startIndex + totalSteps) % total;
 
     // All steps at 60ms except last 3 which slow down like a slot machine
     const delays = Array.from({ length: totalSteps }, (_, i) => {
@@ -284,8 +288,8 @@ export default function App() {
       } else {
         // Landed — load and play (keep isShufflingRef true until done to block handleCenterTap)
         if (userInteracted) {
-          setLoadingDrinkIndex(target);
-          activateDrink(target)
+          setLoadingDrinkIndex(landingIndex);
+          activateDrink(landingIndex)
             .then(() => setLoadingDrinkIndex(null))
             .finally(() => { isShufflingRef.current = false; });
         } else {
