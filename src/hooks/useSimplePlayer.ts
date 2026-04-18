@@ -35,7 +35,6 @@ export const useSimplePlayer = (userInteractedRef: React.RefObject<boolean>) => 
   // Initialize audio element
   if (!audioRef.current) {
     audioRef.current = new Audio();
-    audioRef.current.crossOrigin = 'anonymous';
     audioRef.current.preload = 'none';
   }
 
@@ -90,7 +89,6 @@ export const useSimplePlayer = (userInteractedRef: React.RefObject<boolean>) => 
 
     // Create new audio element for loading
     const newAudio = new Audio();
-    newAudio.crossOrigin = 'anonymous';
     newAudio.preload = 'none';
     loadingAudioRef.current = newAudio;
 
