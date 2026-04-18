@@ -260,6 +260,10 @@ export default function App() {
   };
 
   const handleGridTap = async (index: number) => {
+    if (index === activeDrinkIndex) {
+      toggleMute();
+      return;
+    }
     navigateTo(index);
     if (userInteracted) {
       setLoadingDrinkIndex(index);

@@ -3,8 +3,10 @@ import DrinkIcon from './DrinkIcon';
 import { DRINK_REGISTRY } from '../constants/drinks';
 
 // GRID VIEW (experiment) — to disable: remove <DrinkGridView> from App.tsx
-// Repeat drinks N times for endless scroll feel
-const REPEAT = 6;
+const COLUMNS = 6;
+const ITEM_W = 72; // px per item
+const GAP = 3;
+const REPEAT = 14; // 14 × 14 drinks = 196 tiles, ~33 rows
 
 interface DrinkGridViewProps {
   activeDrinkIndex: number | null;
@@ -29,17 +31,17 @@ export default function DrinkGridView({
       style={{
         position: 'absolute',
         inset: 0,
-        overflowY: 'auto',
-        overflowX: 'hidden',
-        WebkitOverflowScrolling: 'touch' as React.CSSProperties['WebkitOverflowScrolling'],
+        overflow: 'scroll',
+        touchAction: 'pan-x pan-y',
       }}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 4,
-          padding: '56px 4px 96px',
+          gridTemplateColumns: `repeat(${COLUMNS}, ${ITEM_W}px)`,
+          gap: GAP,
+          padding: `60px ${GAP}px 100px`,
+          width: 'max-content',
         }}
       >
         {tiles.map(({ drink, originalIndex }, i) => {
@@ -51,12 +53,13 @@ export default function DrinkGridView({
               onClick={() => onDrinkTap(originalIndex)}
               style={{
                 display: 'block',
+                width: ITEM_W,
                 aspectRatio: '162 / 270',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
-                width: '100%',
+                flexShrink: 0,
               }}
             >
               <DrinkIcon
