@@ -6,6 +6,7 @@ import DrinkCarouselV2 from './components/DrinkCarouselV2';
 import StartScreen from './components/StartScreen';
 import PasswordGate from './components/PasswordGate';
 import StationDisplay from './components/StationDisplay';
+import PwaInstallToast from './components/PwaInstallToast';
 import { usePhysicalCarousel } from './hooks/usePhysicalCarousel';
 // LEGACY: Old carousel hook (can be deleted once V2 is stable)
 // import { useSimpleCarousel } from './hooks/useSimpleCarousel';
@@ -325,6 +326,9 @@ export default function App() {
           isFirstStationLoading={isLoading && loadingDrinkIndex === 0}
         />
       )}
+
+      {/* PWA Install Toast */}
+      <PwaInstallToast show={!showStartScreen} />
 
       {/* Main App */}
       {!showStartScreen && (
