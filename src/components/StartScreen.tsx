@@ -94,7 +94,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({
       onPointerCancel={handlePointerUp}
     >
       {/* Sticker - top left */}
-      <div 
+      <div
         className="absolute"
         style={{
           top: '20px',
@@ -106,6 +106,20 @@ export const StartScreen: React.FC<StartScreenProps> = ({
         }}
       >
         <UpdateStickerV16 />
+      </div>
+
+      {/* New sticker - overlaid slightly rotated */}
+      <div
+        className="absolute"
+        style={{
+          top: '10px',
+          left: '-10px',
+          width: '260px',
+          height: '163px',
+          transform: 'rotate(-7deg)',
+        }}
+      >
+        <img src="/sticker.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
 
       {/* Version - top right */}
