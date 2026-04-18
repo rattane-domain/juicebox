@@ -78,17 +78,21 @@ export default function PwaInstallToast({ show }: { show: boolean }) {
       style={{ padding: '0 16px 32px' }}
     >
       <div
-        className="pointer-events-auto w-full max-w-sm rounded-2xl shadow-xl flex items-center gap-4 relative"
+        className="pointer-events-auto w-full max-w-sm flex items-center gap-4 relative"
         style={{
-          background: 'rgba(245, 245, 245, 0.92)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          background: 'var(--toast-bg)',
+          borderRadius: 28,
           padding: '14px 16px',
           transform: animateIn ? 'translateY(0)' : 'translateY(120%)',
           opacity: animateIn ? 1 : 0,
           transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
         }}
       >
+        <style>{`
+          :root { --toast-bg: #E5E5E5; }
+          .dark { --toast-bg: #ABABAB; }
+        `}</style>
+
         {/* App icon */}
         <img
           src="/icon-192x192.png"
@@ -99,23 +103,23 @@ export default function PwaInstallToast({ show }: { show: boolean }) {
         {/* Text */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div
-            className="font-['Pathway_Extreme',sans-serif] text-[15px] font-semibold text-[#1a1a1a] mb-1"
+            className="font-['Pathway_Extreme',sans-serif] text-[14px] text-[#585858] dark:text-[#EBEBEB] mb-1"
             style={{ fontVariationSettings: "'wdth' 100" }}
           >
             Installiere Juicebox als App!
           </div>
           {ios ? (
             <div
-              className="font-['Pathway_Extreme',sans-serif] text-[13px] text-[#555]"
+              className="font-['Pathway_Extreme',sans-serif] text-[14px] text-[#585858] dark:text-[#EBEBEB]"
               style={{ fontVariationSettings: "'wdth' 100", lineHeight: 1.5 }}
             >
-              &gt; Gehe auf <em>Teilen</em><br />
-              &gt; Wähle <em>Zum Home-Bildschirm</em>
+              → Gehe auf <em>Teilen</em><br />
+              → Wähle <em>Zum Home-Bildschirm</em>
             </div>
           ) : (
             <button
               onClick={installAndroid}
-              className="font-['Pathway_Extreme',sans-serif] text-[13px] text-[#555] underline"
+              className="font-['Pathway_Extreme',sans-serif] text-[14px] text-[#585858] dark:text-[#EBEBEB] underline"
               style={{ fontVariationSettings: "'wdth' 100" }}
             >
               Jetzt installieren
@@ -126,7 +130,7 @@ export default function PwaInstallToast({ show }: { show: boolean }) {
         {/* Close button */}
         <button
           onClick={dismiss}
-          className="absolute top-3 right-3 text-[#888] text-[18px] leading-none"
+          className="absolute top-3 right-3 text-[#9c9c9c] dark:text-[#CBCBCB] text-[18px]"
           style={{ lineHeight: 1, padding: '4px 6px' }}
           aria-label="Schließen"
         >
