@@ -124,7 +124,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   {
     id: 'macherie',
     name: 'Fluid Radio',
-    primaryUrl: 'https://uk4-vn.mixstream.net/:9270/listen.mp3',
+    primaryUrl: 'https://uk4-vn.mixstream.net/9270/listen.mp3',
     fallbackSearchTerms: ['Fluid Radio', 'Fluid'],
     description: 'Experimental ambient and electroacoustic'
   },

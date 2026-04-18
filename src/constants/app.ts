@@ -1,4 +1,4 @@
-export const APP_VERSION = "16.1"; // Race condition fix - first drink now reliably loads on startup
+export const APP_VERSION = "17.0"; // Shuffle slot machine, PWA install toast, desktop tap zones, new icons
 
 export const drinkCategories = [
   { id: 'juicebox', displayName: 'Juicebox', stationName: 'Groove Salad' },
