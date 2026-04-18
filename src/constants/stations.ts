@@ -131,7 +131,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   {
     id: 'beer',
     name: 'Idobi',
-    primaryUrl: 'http://idobi-live-a.cdnstream1.com/10725_128.mp3?/',
+    primaryUrl: 'https://idobi-live-a.cdnstream1.com/10723_128.mp3',
     fallbackSearchTerms: ['Idobi', 'idobi radio'],
     description: 'Alternative rock and pop punk'
   },
@@ -145,7 +145,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   {
     id: 'espresso',
     name: 'Evosonic',
-    primaryUrl: 'https://stream4.themediasite.co.uk/stream/evosonic',
+    primaryUrl: 'https://stream.evosonic.de/',
     fallbackSearchTerms: ['Evosonic', 'evo sonic'],
     description: 'Progressive electronic'
   },
