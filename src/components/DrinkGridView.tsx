@@ -1,18 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'motion/react';
 import DrinkIcon from './DrinkIcon';
 import { DRINK_REGISTRY } from '../constants/drinks';
 
 // GRID VIEW (experiment) — to disable: remove <DrinkGridView> from App.tsx
-const COLS = 7;
-const ITEM_W = 90;   // px
-const ITEM_H = Math.round(ITEM_W * 270 / 162); // ~150px, maintains drink aspect ratio
-const GAP = 4;
-const REPEAT = 10;   // 10 × 14 drinks = 140 tiles
-
-const GRID_W = COLS * ITEM_W + (COLS - 1) * GAP;
-const ROWS = Math.ceil((DRINK_REGISTRY.length * REPEAT) / COLS);
-const GRID_H = ROWS * ITEM_H + (ROWS - 1) * GAP + 60 + 100; // + top/bottom padding
+const ITEM_W = 100;  // px
+const GAP = 8;
+const REPEAT = 60;   // 14 × 60 = 840 tiles — never hits bottom in practice
 
 interface DrinkGridViewProps {
   activeDrinkIndex: number | null;
@@ -27,36 +21,51 @@ export default function DrinkGridView({
   isMuted,
   onDrinkTap,
 }: DrinkGridViewProps) {
-  const tiles = Array.from({ length: DRINK_REGISTRY.length * REPEAT }, (_, i) => ({
-    drink: DRINK_REGISTRY[i % DRINK_REGISTRY.length],
-    originalIndex: i % DRINK_REGISTRY.length,
-  }));
+  const { cols, gridW, gridH, itemH, dragConstraints, tiles } = useMemo(() => {
+    const sw = window.innerWidth;
+    const sh = window.innerHeight;
+    // Grid is 1.5× screen width so there's always room to drag horizontally
+    const cols = Math.ceil((sw * 1.5) / (ITEM_W + GAP));
+    const gridW = cols * ITEM_W + (cols - 1) * GAP;
+    const itemH = Math.round(ITEM_W * 270 / 162);
+    const totalItems = DRINK_REGISTRY.length * REPEAT;
+    const rows = Math.ceil(totalItems / cols);
+    const gridH = rows * itemH + (rows - 1) * GAP + 60 + 100;
 
-  const dragConstraints = {
-    top: -Math.max(0, GRID_H - window.innerHeight),
-    bottom: 0,
-    left: -Math.max(0, GRID_W - window.innerWidth),
-    right: 0,
-  };
+    const tiles = Array.from({ length: totalItems }, (_, i) => ({
+      drink: DRINK_REGISTRY[i % DRINK_REGISTRY.length],
+      originalIndex: i % DRINK_REGISTRY.length,
+    }));
+
+    const dragConstraints = {
+      top: -Math.max(0, gridH - sh),
+      bottom: 0,
+      left: -Math.max(0, gridW - sw),
+      right: 0,
+    };
+
+    return { cols, gridW, gridH, itemH, dragConstraints, tiles };
+  }, []);
 
   return (
     <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
       <motion.div
         drag
         dragMomentum
-        dragElastic={0.08}
+        dragElastic={0.05}
         dragConstraints={dragConstraints}
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           display: 'grid',
-          gridTemplateColumns: `repeat(${COLS}, ${ITEM_W}px)`,
+          gridTemplateColumns: `repeat(${cols}, ${ITEM_W}px)`,
           gap: GAP,
           padding: '60px 0 100px',
-          cursor: 'grab',
+          width: gridW,
           touchAction: 'none',
           userSelect: 'none',
+          cursor: 'grab',
         }}
         whileDrag={{ cursor: 'grabbing' }}
       >
@@ -67,12 +76,7 @@ export default function DrinkGridView({
             <motion.div
               key={i}
               onTap={() => onDrinkTap(originalIndex)}
-              style={{
-                width: ITEM_W,
-                height: ITEM_H,
-                cursor: 'pointer',
-                flexShrink: 0,
-              }}
+              style={{ width: ITEM_W, height: itemH, cursor: 'pointer' }}
             >
               <DrinkIcon
                 drinkId={drink.id}
