@@ -25,17 +25,17 @@ export const STATION_CONFIGS: StationConfig[] = [
   },
   {
     id: 'martini',
-    name: 'FIP',
-    primaryUrl: 'https://icecast.radiofrance.fr/fip-hifi.aac',
-    fallbackSearchTerms: ['FIP', 'Radio France'],
-    description: 'French eclectic music'
-  },
-  {
-    id: 'sprudel',
     name: 'Gri Balkon',
     primaryUrl: 'https://gribalkon.radioca.st/stream',
     fallbackSearchTerms: ['gri balkon', 'gri', 'balkon'],
     description: 'Alternative music station'
+  },
+  {
+    id: 'sprudel',
+    name: 'FIP',
+    primaryUrl: 'https://icecast.radiofrance.fr/fip-hifi.aac',
+    fallbackSearchTerms: ['FIP', 'Radio France'],
+    description: 'French eclectic music'
   },
   {
     id: 'wasser',
@@ -130,10 +130,10 @@ export const STATION_CONFIGS: StationConfig[] = [
   },
   {
     id: 'beer',
-    name: 'Idobi',
-    primaryUrl: 'https://idobi-live-a.cdnstream1.com/10723_128.mp3',
-    fallbackSearchTerms: ['Idobi', 'idobi radio'],
-    description: 'Alternative rock and pop punk'
+    name: 'Radio X 90s',
+    primaryUrl: 'https://media-ice.musicradio.com/RadioX90sMP3',
+    fallbackSearchTerms: ['Radio X 90s', 'Radio X'],
+    description: '90s rock anthems'
   },
   {
     id: 'melon',
@@ -151,10 +151,10 @@ export const STATION_CONFIGS: StationConfig[] = [
   },
   {
     id: 'whisky',
-    name: 'Lofi Girl',
-    primaryUrl: 'https://play.streamafrica.net/lofiradio',
-    fallbackSearchTerms: ['Lofi Girl', 'lofi', 'chillhop'],
-    description: 'Lo-fi hip hop beats'
+    name: 'Ambient Sleeping Pill',
+    primaryUrl: 'https://radio.stereoscenic.com/asp-s',
+    fallbackSearchTerms: ['Ambient Sleeping Pill', 'ambient sleep'],
+    description: 'Peaceful ambient for relaxation'
   },
   {
     id: 'coco',
@@ -165,10 +165,10 @@ export const STATION_CONFIGS: StationConfig[] = [
   },
   {
     id: 'milkandhoney',
-    name: 'Ambient Sleeping Pill',
-    primaryUrl: 'https://radio.stereoscenic.com/asp-s',
-    fallbackSearchTerms: ['Ambient Sleeping Pill', 'ambient sleep'],
-    description: 'Peaceful ambient for relaxation'
+    name: 'Lofi Girl',
+    primaryUrl: 'https://play.streamafrica.net/lofiradio',
+    fallbackSearchTerms: ['Lofi Girl', 'lofi', 'chillhop'],
+    description: 'Lo-fi hip hop beats'
   },
   {
     id: 'nightstar',
