@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // NEW V2: Physical carousel with iOS-style wheel and improved tap timing
 import DrinkCarouselV2 from './components/DrinkCarouselV2';
 // LEGACY: Old carousel (can be deleted once V2 is stable)
@@ -47,7 +47,10 @@ export default function App() {
   
   // Start screen
   const [showStartScreen, setShowStartScreen] = useState(true);
-  
+
+  // Prevent accidental center tap immediately after startup swipe
+  const justLaunchedRef = useRef(false);
+
   // Track which drink is loading
   const [loadingDrinkIndex, setLoadingDrinkIndex] = useState<number | null>(null);
   
@@ -181,7 +184,12 @@ export default function App() {
   const handleStartScreenComplete = async () => {
     console.log('🚀 Start screen completed');
     setShowStartScreen(false);
-    
+
+    // Block center taps for 600ms to prevent the startup swipe's
+    // pointer-up from accidentally triggering mute on the main app
+    justLaunchedRef.current = true;
+    setTimeout(() => { justLaunchedRef.current = false; }, 600);
+
     // Note: First drink is already loading from handleFirstSwipe
     // Just clear loading state if it's done
     if (activeDrinkIndex === 0) {
@@ -194,6 +202,12 @@ export default function App() {
     // Don't allow center tap during animation (swipes should work, but not center tap)
     if (isAnimating) {
       console.log('⚠️ Center tap ignored (carousel animating)');
+      return;
+    }
+
+    // Don't allow tap in the first 600ms after startup (prevents swipe bleed-through)
+    if (justLaunchedRef.current) {
+      console.log('⚠️ Center tap ignored (just launched)');
       return;
     }
     

@@ -137,7 +137,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   },
   {
     id: 'melon',
-    name: 'Radio Vinyle',
+    name: 'Fip : Reggae',
     primaryUrl: 'https://icecast.radiofrance.fr/fipreggae-midfi.mp3',
     fallbackSearchTerms: ['Radio Vinyle', 'FIP reggae'],
     description: 'Reggae and world music'

@@ -37,6 +37,13 @@ export const StartScreen: React.FC<StartScreenProps> = ({
     touchStartY.current = e.clientY;
     hasSwiped.current = false;
     console.log('👇 Pointer down at Y:', e.clientY);
+
+    // Start loading the first drink immediately on touch —
+    // iOS audio context unlocks on pointerdown, so starting here
+    // gives the stream maximum time to buffer before the swipe completes.
+    if (onFirstSwipe) {
+      onFirstSwipe();
+    }
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
@@ -67,12 +74,7 @@ export const StartScreen: React.FC<StartScreenProps> = ({
       // ✅ v16.1: Removed local setUserInteracted call
       // userInteracted is now set in App.tsx via onFirstSwipe callback
       
-      // Start loading first drink (handles userInteracted in App.tsx)
-      if (onFirstSwipe) {
-        onFirstSwipe();
-      }
-      
-      // Complete immediately
+      // Complete (first drink is already loading from handlePointerDown)
       onComplete();
       return;
     }
