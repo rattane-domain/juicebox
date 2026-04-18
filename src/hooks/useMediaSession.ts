@@ -44,9 +44,8 @@ export const useMediaSession = ({
         artist: currentStation.name,
         album: 'Juicebox Radio',
         artwork: [
-          // Use app icons as artwork
-          { src: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
+          { src: '/icon-192x192.png?v=5', sizes: '192x192', type: 'image/png' },
+          { src: '/icon-512x512.png?v=5', sizes: '512x512', type: 'image/png' }
         ]
       });
       
