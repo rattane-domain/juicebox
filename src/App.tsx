@@ -66,6 +66,9 @@ export default function App() {
   // View mode: carousel (default) or grid
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
 
+  // Prevent re-triggering shuffle during slot animation
+  const isShufflingRef = useRef(false);
+
   // Player (one audio element, simple)
   // ✅ v16.1: Pass ref instead of state to fix race condition
   const {
@@ -247,16 +250,45 @@ export default function App() {
     console.log('⚠️ Center tap ignored (not ready)');
   };
 
-  const handleShuffle = async () => {
+  const handleShuffle = () => {
+    if (isShufflingRef.current) return;
+    isShufflingRef.current = true;
+
     const total = DRINK_REGISTRY.length;
-    let idx;
-    do { idx = Math.floor(Math.random() * total); } while (idx === centerIndex && total > 1);
-    navigateTo(idx);
-    if (userInteracted) {
-      setLoadingDrinkIndex(idx);
-      await activateDrink(idx);
-      setLoadingDrinkIndex(null);
-    }
+    let target;
+    do { target = Math.floor(Math.random() * total); } while (target === centerIndexRef.current && total > 1);
+
+    // Steps: 1 full rotation + distance to target (always spin forward/left)
+    const stepsToTarget = ((target - centerIndexRef.current + total) % total) || total;
+    const totalSteps = total + stepsToTarget;
+
+    // Delays: fast → slow, like a slot machine winding down
+    const delays = Array.from({ length: totalSteps }, (_, i) => {
+      const t = i / totalSteps;
+      if (t < 0.35) return 55;
+      if (t < 0.62) return 110;
+      if (t < 0.80) return 210;
+      if (t < 0.92) return 370;
+      return 540;
+    });
+
+    let step = 0;
+    const tick = () => {
+      const next = (centerIndexRef.current + 1) % total;
+      navigateTo(next);
+      step++;
+      if (step < totalSteps) {
+        setTimeout(tick, delays[step]);
+      } else {
+        // Landed — now load and play
+        isShufflingRef.current = false;
+        if (userInteracted) {
+          setLoadingDrinkIndex(target);
+          activateDrink(target).then(() => setLoadingDrinkIndex(null));
+        }
+      }
+    };
+    setTimeout(tick, delays[0]);
   };
 
   const handleGridTap = async (index: number) => {
