@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import UpdateStickerV16 from '../imports/UpdateStickerV16';
 import StartAnimation from '../imports/StartAnimation-7227-63';
 import { APP_VERSION } from '../constants/app';
 
@@ -93,44 +92,17 @@ export const StartScreen: React.FC<StartScreenProps> = ({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
-      {/* Sticker group - top left */}
+      {/* Stickerpack - top left */}
       <div
         className="absolute"
         style={{
-          top: '0px',
+          top: '10px',
           left: '-10px',
-          width: '203px',
-          height: '147px',
+          width: '220px',
+          transform: 'rotate(-8deg)',
         }}
       >
-        {/* Old sticker */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '20px',
-            left: '0px',
-            width: '203px',
-            height: '147px',
-            transform: 'rotate(-12deg)',
-            opacity: 0.95
-          }}
-        >
-          <UpdateStickerV16 />
-        </div>
-
-        {/* New sticker */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '14px',
-            width: '182px',
-            height: '114px',
-            transform: 'rotate(-7deg)',
-          }}
-        >
-          <img src="/sticker.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-        </div>
+        <img src="/stickerpack.png" alt="" style={{ width: '100%', height: 'auto' }} />
       </div>
 
       {/* Version - top right */}
