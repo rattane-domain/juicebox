@@ -47,7 +47,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   {
     id: 'sunrise',
     name: 'Ibiza Sonica',
-    primaryUrl: 'https://streams.radio.co/sddfa96b70/listen',
+    primaryUrl: 'https://ibizasonica.streaming-pro.com:8000/ibizasonica',
     fallbackSearchTerms: ['Ibiza Sonica', 'sonica'],
     description: 'Balearic house and chill'
   },
@@ -131,7 +131,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   {
     id: 'beer',
     name: 'Idobi',
-    primaryUrl: 'https://radio.idobistation.com/?',
+    primaryUrl: 'http://idobi-live-a.cdnstream1.com/10725_128.mp3?/',
     fallbackSearchTerms: ['Idobi', 'idobi radio'],
     description: 'Alternative rock and pop punk'
   },
@@ -145,7 +145,7 @@ export const STATION_CONFIGS: StationConfig[] = [
   {
     id: 'espresso',
     name: 'Evosonic',
-    primaryUrl: 'https://s4.radio.co/s136f5e1c3/listen',
+    primaryUrl: 'https://stream4.themediasite.co.uk/stream/evosonic',
     fallbackSearchTerms: ['Evosonic', 'evo sonic'],
     description: 'Progressive electronic'
   },
