@@ -261,10 +261,11 @@ export default function App() {
     let target;
     do { target = Math.floor(Math.random() * total); } while (target === centerIndexRef.current && total > 1);
 
-    // Distance to target, ensure at least 3 steps for the slow phase
-    let stepsToTarget = ((target - centerIndexRef.current + total) % total) || total;
-    if (stepsToTarget < 3) stepsToTarget += total;
-    const totalSteps = total + stepsToTarget;
+    // Half rotation as base, plus steps to target (max ~1.5 rotations)
+    const half = Math.ceil(total / 2);
+    let stepsToTarget = ((target - centerIndexRef.current + total) % total) || half;
+    if (stepsToTarget < 3) stepsToTarget += half;
+    const totalSteps = half + stepsToTarget;
 
     // All steps at 60ms except last 3 which slow down like a slot machine
     const delays = Array.from({ length: totalSteps }, (_, i) => {
