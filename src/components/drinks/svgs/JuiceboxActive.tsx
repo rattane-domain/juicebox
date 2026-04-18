@@ -1,0 +1,84 @@
+import React from 'react';
+
+export default function ConvertedSVG() {
+  return (
+    <svg width="150" height="250" viewBox="0 0 150 250" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+    <path d="M41 179.442V93.5L62.5 104.838V189.997L41 179.442Z" fill="#B2C17C" stroke="black" />
+    <path d="M105.5 178.5L62.5 190V105L105.5 94.5V178.5Z" fill="#DEF09D" stroke="black" />
+    <path d="M50 117.5L41.5 94L62.5 104.5L50 117.5Z" stroke="black" />
+    <path d="M84.5 85.5L41 93.5L62.5 105L106 94.5L84.5 85.5Z" fill="#F5FFD0" stroke="black" />
+    <path d="M73.301 128.709H75.3607L76.5377 128.336H77.4205L78.5975 128.709L79.7744 129.456L80.6572 130.577L81.5399 133.191L82.1284 135.805L83.0112 138.793L83.5997 141.033L84.7767 143.648L85.9537 145.515L86.8364 148.129L87.4249 150.37L87.7192 152.611V155.225V157.092L87.4249 159.333L86.8364 162.321L85.9537 164.188L84.7767 166.802L82.7169 169.043L80.6572 170.163L79.1859 170.91H76.832H73.8895L71.2412 170.163L69.1815 169.043L67.7102 167.549L66.5332 166.802L65.3562 164.935L64.4735 163.067L63.885 161.2L63.0023 158.212L62.708 155.972V153.358L63.5908 148.876L66.5332 142.154L68.2987 138.419L69.1815 135.432L70.3585 131.324L71.2412 129.456L73.301 128.709Z" fill="url(#paint0_linear_486_332)" stroke="black" />
+    <path d="M74.772 125.722V128.336H75.949V125.349L76.8317 122.361L77.7145 120.494L75.6547 119V121.241L74.772 125.722Z" fill="#E3BA61" fillOpacity="0.88" stroke="black" />
+    {/* Gruppe für den winkenden Arm der linken Birne */}
+    <g id="left-pear-waving-arm">
+        <path d="M65.3563 144.02L62.7081 142.526L61.2368 140.285L60.0598 137.671L61.2368 136.551" stroke="black" />
+        <path d="M60.0598 137.674L58.8828 136.18" stroke="black" />
+        <path d="M60.0597 137.672L58 138.792" stroke="black" />
+        {/* Animation für das Winken */}
+        <animateTransform attributeName="transform" type="rotate" values="0 65 144; -20 65 144; 0 65 144" keyTimes="0; 0.5; 1" dur="1.5s" repeatCount="indefinite" />
+    </g>
+    <path d="M85.0709 144.77V147.757L84.1881 149.998L82.4226 151.118H80.0687L77.4204 149.998" stroke="black" />
+    <path d="M79.7745 151.117L79.186 149.25" stroke="black" />
+    <path d="M79.48 151.492L78.0088 152.613" stroke="black" />
+    <path d="M70.0641 169.418V177.634H68.0044" stroke="black" />
+    <path d="M77.4205 171.285V178.381L75.9492 179.501" stroke="black" />
+    <ellipse cx="72.7125" cy="137.298" rx="0.588498" ry="0.746914" fill="black" />
+    <ellipse cx="76.8319" cy="137.298" rx="0.588498" ry="0.746914" fill="black" />
+    <ellipse cx="79.4712" cy="141.867" rx="1.47124" ry="1.86728" fill="#FFD6F9" />
+    <ellipse cx="69.4712" cy="141.867" rx="1.47124" ry="1.86728" fill="#FFD6F9" />
+    <path d="M73.301 141.465C73.4133 141.608 73.6672 141.93 73.8513 142.11C74.0017 142.257 74.1901 142.254 74.402 142.317C74.6097 142.379 74.9511 142.38 75.2073 142.273C75.3038 142.232 75.363 142.111 75.4124 142.004C75.4622 141.718 75.4762 141.412 75.4974 141.287C75.5046 141.215 75.5046 141.127 75.547 141.035" stroke="black" strokeLinecap="round" />
+    <path d="M54.5 134.5L53.5 136.5V139.5L54 142.5" stroke="black" />
+    <path d="M51 134L50.5 137V140" stroke="black" />
+    <path d="M85.7723 134.21L87.8337 132.899L88.8408 131.826L89.7243 131.264L91.0731 130.838L92.5926 130.734L93.9885 131.141L96.0676 132.841L97.8522 134.727L100.102 136.749L101.716 138.313L104.09 139.825L105.5 140.5L105.662 153L105.5 160.5L105.5 170.397L102.67 171.381L100.097 171.723L97.941 171.368L96.4214 171.471L94.3894 170.605L92.6519 169.552L91.2089 168.312L88.959 166.289L87.6397 164.538L86.444 162.277L85.2778 157.838L85.1482 150.15L85.207 145.795L84.724 142.649L84.0231 138.345L84.0525 136.168L85.7723 134.21Z" fill="url(#paint1_linear_486_332)" />
+    <path d="M105.5 140.5L105.662 153L105.5 160.5L105.5 170.397L105.662 170.34L102.67 171.381L100.097 171.723L97.941 171.368L96.4214 171.471L94.3894 170.605L92.6519 169.552L91.2089 168.312L88.959 166.289L87.6397 164.538L86.444 162.277L85.2778 157.838L85.1482 150.15L85.207 145.795L84.724 142.649L84.0231 138.345L84.0525 136.168L85.7723 134.21L87.8337 132.899L88.8408 131.826L89.7243 131.264L91.0731 130.838L92.5926 130.734L93.9885 131.141L96.0676 132.841L97.8522 134.727L100.102 136.749L101.716 138.313L104.09 139.825L105.5 140.5ZM105.5 140.5L105.662 139.825M105.5 140.5L105 140.5" stroke="black" />
+    <path d="M93.9961 145.969L95.7463 145.001L104.996 162.004L105 165.5L93.9961 145.969Z" fill="white" />
+    <path d="M85.8782 130.69L87.0739 132.951L88.2518 132.202L86.8854 129.617L86.4024 126.471L86.4318 124.293L83.6872 124.313L84.712 126.251L85.8782 130.69Z" fill="#E3BA61" fillOpacity="0.88" stroke="black" />
+    <path d="M95.7666 170.805V179.021H93.3835" stroke="black" />
+    <ellipse cx="89.7022" cy="145.867" rx="1.70218" ry="1.86728" fill="#FFD6F9" />
+    <ellipse cx="98.7022" cy="139.867" rx="1.70218" ry="1.86728" fill="#FFD6F9" />
+    <path d="M92.8061 143.685C92.9864 143.724 93.394 143.811 93.6624 143.83C93.8816 143.846 94.0607 143.71 94.2961 143.612C94.5269 143.516 94.8554 143.275 95.0468 143.005C95.119 142.903 95.1142 142.76 95.107 142.636C95.0091 142.364 94.8671 142.1 94.8239 141.981C94.7942 141.917 94.7491 141.843 94.7433 141.737" stroke="black" strokeLinecap="round" />
+    {/* Zugekniffenes Auge 1 (wird unsichtbar) */}
+    <path d="M94.6297 137.967C94.4522 137.915 94.051 137.797 93.7844 137.757C93.5667 137.725 93.3795 137.848 93.1385 137.928C92.9023 138.006 92.5596 138.222 92.3517 138.477C92.2734 138.573 92.2692 138.716 92.2686 138.84C92.3493 139.12 92.4745 139.393 92.5103 139.515" stroke="black" strokeLinecap="round">
+        <animate attributeName="opacity" values="1;0;0;1;1" keyTimes="0;0.3;0.7;1;1" dur="5s" repeatCount="indefinite" />
+    </path>
+    {/* Zugekniffenes Auge 2 (wird unsichtbar) */}
+    <path d="M88.4227 142.564C88.4494 142.365 88.5097 141.914 88.5825 141.63C88.642 141.398 88.8188 141.258 88.9813 141.047C89.1405 140.84 89.4567 140.58 89.7528 140.472C89.8643 140.431 89.9851 140.483 90.0893 140.532C90.2914 140.724 90.4706 140.959 90.5583 141.043" stroke="black" strokeLinecap="round">
+        <animate attributeName="opacity" values="1;0;0;1;1" keyTimes="0;0.3;0.7;1;1" dur="5s" repeatCount="indefinite" />
+    </path>
+    {/* Neues offenes Auge 1 (wird sichtbar) */}
+    <ellipse cx="93.5" cy="138.5" rx="0.588498" ry="0.746914" fill="black" opacity="0">
+        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.3;0.7;1;1" dur="5s" repeatCount="indefinite" />
+    </ellipse>
+    {/* Neues offenes Auge 2 (wird sichtbar) */}
+    <ellipse cx="89.5" cy="141.5" rx="0.588498" ry="0.746914" fill="black" opacity="0">
+        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.3;0.7;1;1" dur="5s" repeatCount="indefinite" />
+    </ellipse>
+    <path d="M105.5 140.5V146L105.299 148.399L103.256 149.519H100.533L97.4688 148.399" stroke="black" />
+    <path d="M85.2132 151.013L88.4672 155.063L90.4291 156.345L92.6999 156.08L94.9931 154.468L97.0219 151.712" stroke="black" />
+    <path d="M100.192 149.52L99.5115 147.652" stroke="black" />
+    <path d="M96.1013 153.753L97.8584 153.18" stroke="black" />
+    <path d="M100.192 149.52L98.1497 151.013" stroke="black" />
+    <path d="M96.1016 153.755L94.9315 151.387" stroke="black" />
+    <path d="M100.657 131.723L99.9498 129.601L97.8285 127.48L95.3536 125.712" stroke="black" />
+    <path d="M103.485 129.6L101.718 127.125L99.5962 125.003" stroke="black" />
+    <path d="M50.5 117L51.5 98.5L92.5 89" stroke="black" />
+    <path d="M95.5 66.5L87.5 94.5L92.5 96L99.5 72L101 71.5L101.5 70.5L102 70L103 69H104.5V68H105.5L106.5 67L126.5 69L128 68.5L128.5 67.5V65V64L126.5 63L105.5 61L104 60H102.5L101.5 60.5L101 61H100L99 61.5V62.5H98L97 63L96.5 64L95.5 64.5L95 65.5L95.5 66.5Z" fill="white" stroke="black" />
+    <path d="M96.5 64L102 70.5" stroke="black" />
+    <path d="M95.5 66.5L100 72" stroke="black" />
+    <path d="M99 62.5L102.5 69" stroke="black" />
+    <path d="M101.5 61L104.5 68.5" stroke="black" />
+    <path d="M105 60.5L106.5 67.5" stroke="black" />
+    <path d="M127 63.5L126 64.5L125.5 65.5V67V68V68.5L127 69" stroke="black" />
+    <defs>
+    <linearGradient id="paint0_linear_486_332" x1="75.2136" y1="128.336" x2="75.2136" y2="170.91" gradientUnits="userSpaceOnUse">
+    <stop offset="0.572115" stopColor="#BFC642" stopOpacity="0.9" />
+    <stop offset="1" stopColor="#A3A333" />
+    </linearGradient>
+    <linearGradient id="paint1_linear_486_332" x1="87.5157" y1="132.669" x2="109.807" y2="167.703" gradientUnits="userSpaceOnUse">
+    <stop stopColor="#C5CB54" />
+    <stop offset="1" stopColor="#A5A635" />
+    </linearGradient>
+    </defs>
+    </svg>
+  );
+}

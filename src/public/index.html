@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Juicebox - 3D Drink Carousel Radio</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Juicebox - 3D Drink Carousel Radio">
+    <meta name="description" content="A unique 3D carousel radio app where drinks represent music genres and stations">
+    <meta name="keywords" content="radio, music, 3D, carousel, drinks, genres, streaming, juicebox">
+    <meta name="author" content="Juicebox">
+    
+    <!-- Apple Touch Icon - High-quality PNG -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- PWA Meta Tags - Dynamic theme colors -->
+    <meta name="theme-color" content="#F1F1F1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Juicebox">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- iOS Specific Meta Tags -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="msapplication-TileColor" content="#F1F1F1">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Juicebox - 3D Drink Carousel Radio">
+    <meta property="og:description" content="A unique 3D carousel radio app where drinks represent music genres and stations">
+    <meta property="og:image" content="/icon-512x512.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="Juicebox - 3D Drink Carousel Radio">
+    <meta property="twitter:description" content="A unique 3D carousel radio app where drinks represent music genres and stations">
+    <meta property="twitter:image" content="/icon-512x512.png">
+    
+    <!-- Prevent zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- DNS Prefetch - All radio stream domains (cheap, fast DNS resolution) -->
+    <link rel="dns-prefetch" href="//icecast.lyl.live">
+    <link rel="dns-prefetch" href="//ice1.somafm.com">
+    <link rel="dns-prefetch" href="//ice2.somafm.com">
+    <link rel="dns-prefetch" href="//ice6.somafm.com">
+    <link rel="dns-prefetch" href="//icecast.radiofrance.fr">
+    <link rel="dns-prefetch" href="//gribalkon.radioca.st">
+    <link rel="dns-prefetch" href="//streams.radio.co">
+    <link rel="dns-prefetch" href="//s4.radio.co">
+    <link rel="dns-prefetch" href="//ibizasonica.streaming-pro.com">
+    <link rel="dns-prefetch" href="//dublab.out.airtime.pro">
+    <link rel="dns-prefetch" href="//stream.radioparadise.com">
+    <link rel="dns-prefetch" href="//bytefm.stream39.radiohost.de">
+    <link rel="dns-prefetch" href="//playerservices.streamtheworld.com">
+    <link rel="dns-prefetch" href="//radio.canstream.co.uk">
+    <link rel="dns-prefetch" href="//uk4-vn.mixstream.net">
+    <link rel="dns-prefetch" href="//deep.friskyradio.com">
+    <link rel="dns-prefetch" href="//listen.181fm.com">
+    <link rel="dns-prefetch" href="//mediaworks.streamguys1.com">
+    <link rel="dns-prefetch" href="//radio10.pro-fhi.net">
+    <link rel="dns-prefetch" href="//radio.idobistation.com">
+    <link rel="dns-prefetch" href="//play.streamafrica.net">
+    <link rel="dns-prefetch" href="//stream.radiojar.com">
+    <link rel="dns-prefetch" href="//radio.stereoscenic.com">
+    
+    <!-- Preconnect - Top 10 priority stream servers (DNS + TCP + TLS handshake) -->
+    <!-- User Priority Stations -->
+    <link rel="preconnect" href="https://streams.kcrw.com" crossorigin> <!-- KCRW Eclectic24 (chocolatemilk) -->
+    <link rel="preconnect" href="https://ice1.somafm.com" crossorigin>          <!-- Groove Salad (juicebox) -->
+    <link rel="preconnect" href="https://gribalkon.radioca.st" crossorigin>     <!-- Gri Balkon (sprudel) -->
+    <link rel="preconnect" href="https://icecast.radiofrance.fr" crossorigin>   <!-- FIP (martini) + Radio Vinyle (melon) -->
+    <link rel="preconnect" href="https://mediaworks.streamguys1.com" crossorigin> <!-- George FM (energydrink) -->
+    <link rel="preconnect" href="https://s4.radio.co" crossorigin>              <!-- Evosonic (espresso) -->
+    <!-- Popular/Reliable Stations -->
+    <link rel="preconnect" href="https://ice2.somafm.com" crossorigin>          <!-- Deep Space One (wasser) -->
+    <link rel="preconnect" href="https://stream.radioparadise.com" crossorigin> <!-- Radio Paradise (milkshake) -->
+    <link rel="preconnect" href="https://streams.radio.co" crossorigin>         <!-- Ibiza Sonica (sunrise) -->
+    <link rel="preconnect" href="https://play.streamafrica.net" crossorigin>    <!-- Lofi Girl (whisky) -->
+    
+    <!-- Legacy API endpoints (kept for backwards compatibility) -->
+    <link rel="preconnect" href="https://at1.api.radio-browser.info">
+    <link rel="preconnect" href="https://de1.api.radio-browser.info">
+    <link rel="preconnect" href="https://nl1.api.radio-browser.info">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

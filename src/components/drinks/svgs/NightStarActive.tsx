@@ -1,0 +1,108 @@
+import React from 'react';
+
+export default function ConvertedSVG() {
+  return (
+    <svg width="150" height="249" viewBox="0 0 150 249" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+      <style>{`{\`/* Gesamtzykluszeit: 2s (Stern 1 dreht) + 5s (Pause) + 2s (Stern 2 dreht) + 5s (Pause) + 2s (Stern 3 dreht) + 5s (Pause) = 21s */
+    
+        /* Animation für Stern 1 (Mitte) */
+        @keyframes rotateAndScaleStar1 {
+          /* Startpunkt der Animation (0s im 21s Zyklus) */
+          0% {
+            transform: rotate(0deg) scale(1);
+          }
+          /* Mitte der Drehung (180 Grad, 1s im 21s Zyklus = 4.7619% des Zyklus) - Stern verkleinert sich */
+          4.76190476% {
+            transform: rotate(180deg) scale(0.3); /* Skaliert auf 30% der Originalgröße */
+          }
+          /* Ende der Drehung (360 Grad, 2s im 21s Zyklus = 9.5238% des Zyklus) - Stern vergrößert sich zurück */
+          9.52380952% {
+            transform: rotate(360deg) scale(1);
+          }
+          /* Bleibt bis zum Ende des 21s Zyklus in diesem Zustand (entspricht der 5-Sekunden-Pause plus den nachfolgenden Animationen und Pausen) */
+          100% {
+            transform: rotate(360deg) scale(1);
+          }
+        }
+    
+        /* Animation für Stern 2 (Rechts) */
+        @keyframes rotateAndScaleStar2 {
+          /* Pause bis 7s (7s im 21s Zyklus = 33.3333% des Zyklus) */
+          0%, 33.33333333% {
+            transform: rotate(0deg) scale(1);
+          }
+          /* Mitte der Drehung (180 Grad, 1s nach Start der Rotation = 8s im 21s Zyklus = 38.0952% des Zyklus) */
+          38.0952381% {
+            transform: rotate(180deg) scale(0.3);
+          }
+          /* Ende der Drehung (360 Grad, 2s nach Start der Rotation = 9s im 21s Zyklus = 42.8571% des Zyklus) */
+          42.85714286% {
+            transform: rotate(360deg) scale(1);
+          }
+          /* Bleibt bis zum Ende des 21s Zyklus in diesem Zustand */
+          100% {
+            transform: rotate(360deg) scale(1);
+          }
+        }
+    
+        /* Animation für Stern 3 (Links) */
+        @keyframes rotateAndScaleStar3 {
+          /* Pause bis 14s (14s im 21s Zyklus = 66.6666% des Zyklus) */
+          0%, 66.66666667% {
+            transform: rotate(0deg) scale(1);
+          }
+          /* Mitte der Drehung (180 Grad, 1s nach Start der Rotation = 15s im 21s Zyklus = 71.4285% des Zyklus) */
+          71.42857143% {
+            transform: rotate(180deg) scale(0.3);
+          }
+          /* Ende der Drehung (360 Grad, 2s nach Start der Rotation = 16s im 21s Zyklus = 76.1904% des Zyklus) */
+          76.19047619% {
+            transform: rotate(360deg) scale(1);
+          }
+          /* Bleibt bis zum Ende des 21s Zyklus in diesem Zustand */
+          100% {
+            transform: rotate(360deg) scale(1);
+          }
+        }
+    
+        /* Anwenden der Animationen und Definition des Rotations-/Skalierungsursprungs */
+        #star1 {
+          transform-origin: 75.1px 62px; /* Mittelpunkt des mittleren Sterns */
+          animation: rotateAndScaleStar1 21s linear infinite;
+        }
+    
+        #star2 {
+          transform-origin: 94.1px 63.8px; /* Mittelpunkt des rechten Sterns */
+          animation: rotateAndScaleStar2 21s linear infinite;
+        }
+    
+        #star3 {
+          transform-origin: 57.85px 63.4px; /* Mittelpunkt des linken Sterns */
+          animation: rotateAndScaleStar3 21s linear infinite;
+        }\`}`}</style>
+    
+      <path d="M120.074 66.2695H34.6567L73.6883 122.837V180.536V182.798L72.5569 186.192L70.8599 188.455L66.9002 190.152L62.3748 191.284L52.1926 195.243V198.072H103.103V195.243L90.6585 191.284L86.1331 190.152L83.3047 188.455L81.6077 186.192L80.4764 182.798V180.536V121.706L120.074 66.2695Z" fill="white" stroke="black" strokeWidth="0.791944" />
+      <path d="M120.074 66.2695H34.6567L73.6883 122.837V180.536V182.798L72.5569 186.192L70.8599 188.455L66.9002 190.152L62.3748 191.284L52.1926 195.243V198.072H103.103V195.243L90.6585 191.284L86.1331 190.152L83.3047 188.455L81.6077 186.192L80.4764 182.798V180.536V121.706L120.074 66.2695Z" fill="#D9D9D9" fillOpacity="0.5" stroke="black" strokeWidth="1.13135" />
+      <path d="M131.952 64.207H20.7607" stroke="#70C1E4" strokeWidth="1.35762" />
+      <path d="M17.6865 66.8364C18.1322 66.8364 18.5736 66.7633 18.9854 66.6211C19.3972 66.479 19.7713 66.2707 20.0865 66.008C20.4016 65.7454 20.6516 65.4336 20.8222 65.0904C20.9928 64.7473 21.0806 64.3795 21.0806 64.0081C21.0806 63.6366 20.9928 63.2688 20.8222 62.9257C20.6516 62.5825 20.4016 62.2707 20.0865 62.0081C19.7713 61.7455 19.3972 61.5371 18.9854 61.395C18.5736 61.2528 18.1322 61.1797 17.6865 61.1797" stroke="#70C1E4" strokeWidth="1.35762" />
+      <path d="M17.6865 66.8364C17.9837 66.8364 18.2779 66.7633 18.5524 66.6211C18.8269 66.479 19.0764 66.2707 19.2865 66.008C19.4966 65.7454 19.6633 65.4336 19.777 65.0904C19.8907 64.7473 19.9492 64.3795 19.9492 64.0081C19.9492 63.6366 19.8907 63.2688 19.777 62.9257C19.6633 62.5825 19.4966 62.2707 19.2865 62.0081C19.0764 61.7455 18.8269 61.5371 18.5524 61.395C18.2779 61.2528 17.9837 61.1797 17.6865 61.1797" stroke="#70C1E4" strokeWidth="1.35762" />
+      <path d="M75.3855 121.705L49.9302 83.8398H104.235L77.6482 121.705H75.3855Z" fill="url(#paint0_linear_488_422)" stroke="black" strokeWidth="1.13135" />
+    
+      {/* Stern 1 (Mitte) */}
+      <path id="star1" d="M77.0911 59.5938L77.218 59.9844H84.1086L78.8665 63.793L78.5344 64.0342L78.6614 64.4248L80.6633 70.5869L75.4211 66.7783L75.0891 66.5371L74.7571 66.7783L69.5139 70.5869L71.5168 64.4248L71.6438 64.0342L71.3118 63.793L66.0696 59.9844H72.9602L73.0872 59.5938L75.0891 53.4316L77.0911 59.5938Z" fill="#FFFCEC" stroke="white" strokeWidth="1.13135" />
+    
+      {/* Stern 2 (Rechts) */}
+      <path id="star2" d="M96.9042 61.2673L96.845 61.6737L103.022 64.7265L96.6355 65.8185L96.231 65.8876L96.1717 66.2941L95.2365 72.7054L92.2242 66.9685L92.0333 66.6051L91.6288 66.6743L85.241 67.7659L89.7666 63.1288L90.0535 62.8349L89.8627 62.4715L86.8503 56.7347L93.0278 59.7874L93.3147 59.4934L97.8394 54.856L96.9042 61.2673Z" fill="#FFFCEC" stroke="white" strokeWidth="1.13135" />
+    
+      {/* Stern 3 (Links) */}
+      <path id="star3" d="M60.3844 65.4305L59.9738 65.4412L58.0166 72.048L55.8539 65.94L55.7169 65.5531L55.3063 65.5639L48.8294 65.733L53.9701 61.7886L54.2957 61.5387L54.1587 61.1519L51.9963 55.0429L57.3357 58.7136L57.6742 58.9463L57.9997 58.6964L63.1405 54.752L61.1832 61.3588L61.5217 61.5915L66.8614 65.2613L60.3844 65.4305Z" fill="#FFFCEC" stroke="white" strokeWidth="1.13135" />
+    
+      <defs>
+        <linearGradient id="paint0_linear_488_422" x1="76.7997" y1="83.8045" x2="76.7997" y2="121.705" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#D9D9D9" />
+          <stop offset="0.552885" stopColor="#C3F8FF" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

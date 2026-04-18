@@ -1,0 +1,454 @@
+import React from 'react';
+
+export default function DinoLaserCanSequence() {
+  return (
+    <svg
+      viewBox="0 0 150 249"
+      className="block w-full h-full"
+      fill="none"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      {/* Definitions for clip paths and gradients */}
+      <defs>
+        <linearGradient
+          id="paint0_linear_488_195"
+          x1="96.2427"
+          y1="114.242"
+          x2="55.2427"
+          y2="151.742"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#FF0000" />
+          <stop offset="0.754808" stop-color="#FFAE68" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear_488_195"
+          x1="96.2427"
+          y1="128.242"
+          x2="55.2427"
+          y2="165.742"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.427885" stop-color="#FFAE68" />
+          <stop offset="1" stop-color="#F7FF00" />
+        </linearGradient>
+        <linearGradient
+          id="paint2_linear_488_195"
+          x1="96.2427"
+          y1="147.242"
+          x2="79.2427"
+          y2="163.742"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.0528846" stop-color="#FFAE67" />
+          <stop offset="0.923077" stop-color="#FFFC3A" />
+        </linearGradient>
+        <linearGradient
+          id="paint3_linear_488_195"
+          x1="76.7427"
+          y1="80.2422"
+          x2="76.7427"
+          y2="63.2422"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="white" stop-opacity="0" />
+          <stop offset="0.639423" stop-color="white" />
+        </linearGradient>
+        {/* Clip paths for the eye lasers */}
+        <clipPath id="clip-path-1">
+          <rect id="clip-rect-1" x="70.7" y="100.7" width="0" height="20.5" />
+        </clipPath>
+        <clipPath id="clip-path-2">
+          <rect id="clip-rect-2" x="81.2" y="101.2" width="0" height="35.5" />
+        </clipPath>
+        {/* Clip paths to control the appearance of the diagonal lasers */}
+        <clipPath id="clip-path-3">
+          <rect id="clip-rect-3" x="96.2" y="106.7" width="0" height="45.5" />
+        </clipPath>
+        <clipPath id="clip-path-4">
+          <rect id="clip-rect-4" x="96.2" y="120.7" width="0" height="45.5" />
+        </clipPath>
+        <clipPath id="clip-path-5">
+          <rect id="clip-rect-5" x="96.2" y="141.7" width="0" height="24.5" />
+        </clipPath>
+      </defs>
+
+      {/* Static elements of the can (always visible) */}
+      <path
+        d="M53.2427 173.242V171.742V73.7422V71.7422L54.2427 69.7422L55.7427 70.7422L57.7427 71.2422L60.2427 72.2422L64.2427 72.7422L69.2427 73.2422H74.7427H79.7427L83.7427 72.7422L87.7427 72.2422L91.7427 71.7422L94.7427 70.2422L95.7427 72.2422L96.2427 74.2422V173.742L95.2427 175.742L93.2427 177.742L89.7427 179.742L85.7427 181.242L81.7427 181.742L76.2427 182.242H70.7427L66.7427 181.742L63.2427 180.742L59.7427 179.742L55.7427 177.242L53.7427 174.742L53.2427 173.242Z"
+        fill="white"
+        stroke="black"
+      />
+      <path
+        d="M53.7427 68.7422L54.2427 69.7422L56.2427 70.7422L60.2427 72.2422L69.2427 73.2422H79.7427L91.2427 71.7422L94.7427 70.2422L95.2427 68.2422V66.7422L93.7427 65.2422L91.2427 64.7422L87.2427 63.7422L82.7427 63.2422L77.2427 62.7422H71.7427L65.2427 63.2422L60.2427 63.7422L56.2427 64.7422L53.7427 66.2422V68.7422Z"
+        fill="white"
+      />
+      <path
+        d="M57.2427 179.742L55.7427 177.742L59.7427 179.742L66.7427 181.742L70.7427 182.242H76.7427L85.7427 181.242L90.7427 179.242L93.7427 177.742L91.7427 180.242L89.7427 181.742L86.7427 183.242L83.2427 184.242L79.2427 184.742H75.2427H71.2427L67.7427 184.242L63.7427 183.242L59.7427 181.242L57.2427 179.742Z"
+        fill="white"
+      />
+      <path
+        d="M54.2427 69.7422L53.7427 68.7422V66.2422L56.2427 64.7422L60.2427 63.7422L65.2427 63.2422L71.7427 62.7422H77.2427L82.7427 63.2422L87.2427 63.7422L91.2427 64.7422L93.7427 65.2422L95.2427 66.7422V68.2422L94.7427 70.2422"
+        stroke="black"
+      />
+      <path
+        d="M54.2427 66.7422L55.7427 67.7422L57.7427 68.7422L59.7427 69.2422L62.7427 69.7422L65.7427 70.2422L68.7427 70.7422H72.2427H75.7427H79.7427L84.7427 70.2422L89.2427 69.7422L91.7427 68.7422L95.2427 67.2422"
+        stroke="black"
+      />
+      <path
+        d="M57.7427 68.2422L60.2427 67.2422L63.7427 66.7422L68.2427 66.2422H72.7427H76.2427H79.2427L82.2427 66.7422L85.7427 67.2422L88.7427 67.7422L91.7427 68.7422"
+        stroke="black"
+      />
+      <path
+        d="M55.7427 177.742L57.2427 179.742L59.7427 181.242L63.7427 183.242L67.7427 184.242L71.2427 184.742H75.2427H79.2427L83.2427 184.242L86.7427 183.242L89.7427 181.742L91.7427 180.242L93.7427 177.742"
+        stroke="black"
+      />
+      <path
+        d="M55.2427 125.742L53.2427 124.242V71.7422L54.2427 69.7422L57.2427 71.2422L61.2427 72.2422L70.2427 73.2422H80.2427L85.7427 72.7422V76.7422L74.7427 130.242H77.2427H80.2427L83.7427 129.742L87.2427 128.742L90.2427 127.742L94.2427 125.742L96.2427 124.242V173.742L93.7427 177.242L90.2427 179.242L85.7427 181.242L76.2427 182.242H71.2427L66.7427 181.742L64.2427 180.742L74.2427 132.242L74.7427 130.242L68.7427 129.742L64.7427 129.242L59.7427 127.742L55.2427 125.742Z"
+        fill="#4646BB"
+      />
+      <path
+        d="M74.7427 130.242L68.7427 129.742L64.7427 129.242L59.7427 127.742L55.2427 125.742L53.2427 124.242V71.7422L54.2427 69.7422L57.2427 71.2422L61.2427 72.2422L70.2427 73.2422H80.2427L85.7427 72.7422V76.7422L74.7427 130.242ZM74.7427 130.242H77.2427H80.2427L83.7427 129.742L87.2427 128.742L90.2427 127.742L94.2427 125.742L96.2427 124.242V173.742L93.7427 177.242L90.2427 179.242L85.7427 181.242L76.2427 182.242H71.2427L66.7427 181.742L64.2427 180.742L74.2427 132.242L74.7427 130.242Z"
+        stroke="black"
+      />
+      <path
+        d="M78.2427 66.7422L79.7427 68.8672M79.7427 68.8672L73.7427 69.2422L70.2427 68.7422L71.2427 67.2422L80.7427 66.2422H84.7427L86.7427 67.7422L81.7427 68.7422L79.7427 68.8672Z"
+        stroke="black"
+      />
+      <path d="M83.2427 135.742V137.242V138.242" stroke="black" />
+      <path d="M83.2427 135.742H85.2427V136.742" stroke="black" />
+      <path d="M79.7427 136.742L81.7427 138.242" stroke="black" />
+      <path d="M90.7427 137.742L91.7427 139.242" stroke="black" />
+      <path d="M91.7427 140.742L93.7427 141.742" stroke="black" />
+      <path
+        d="M96.0821 106.99V133.968H95.3028L93.3479 133.577L92.175 135.141L91.3931 136.314L90.6111 137.096H88.6562H86.7013H85.5284L84.3555 137.878L83.5735 138.659L83.1825 137.878H82.4006L81.2276 138.659L80.4457 139.441L79.6637 140.614L79.2728 139.05L79.6637 137.487V137.096L80.4457 136.314L81.2276 135.923H82.7915L83.1825 135.532V134.75L83.5735 133.968H84.3555L84.7464 134.359L85.5284 134.75H86.3103L87.4833 133.968L88.6562 133.186V132.404L89.0472 131.622V130.058L88.2652 128.885L87.8743 127.321L88.2652 126.148L87.4833 125.757H85.9194L84.3555 125.366H83.1825L82.7915 124.193L82.0096 123.411L75.363 128.494L73.7991 129.667L72.2352 130.449H70.6712L69.4983 130.058L68.3254 129.667L67.5434 128.885L67.1525 127.321L67.5434 125.366L67.7427 126.242L68.3254 124.584L69.4983 123.02L71.0622 121.456L72.2352 119.893V119.111L71.0622 117.156L70.6712 118.72L69.4983 117.156L68.7164 118.72L67.9344 116.765L67.1525 118.329L66.3705 116.374L65.5885 117.547L64.8066 115.983L64.0246 117.547L63.6337 115.592L62.7427 114.742V113.742L63.2427 112.242L64.0246 110.601L65.1976 108.554L66.3705 106.99L67.9344 105.426L68.7164 104.253L69.8893 102.69L70.2803 101.517L69.8893 101.126L71.0622 99.9527L69.4983 99.1708L71.4532 97.6068L70.2803 97.2159L71.8442 96.4339L70.6712 95.652H72.6261L71.8442 93.6971L73.7991 94.479V93.6971L74.972 94.0881L75.754 93.3061L76.5359 92.9151L77.3179 92.5241H77.7088H78.8818H80.0547L82.4006 92.1332L83.9645 91.7422H85.5284L87.8743 92.5241L89.4382 93.3061L91.0021 94.87L92.175 97.6068L92.957 99.9527L93.3479 103.081L93.7389 105.035L94.5209 105.426V106.99H96.0821Z"
+        fill="#70E206"
+      />
+      <path
+        d="M96.0821 137.558L96.2427 140.242L95.6938 140.614L94.5209 141.396L93.7389 141.787L92.957 142.178L91.784 142.96L90.2201 143.742L91.0021 142.178L91.3931 141.396L92.175 140.614L92.957 140.223L93.3479 139.441L92.957 138.659H92.175L91.3931 139.441H90.2201L88.6562 140.223V139.441L89.4382 138.269L90.2201 137.487H91.3931L91.784 136.705H92.566H93.3479L94.5209 137.487H95.6938L96.0821 137.558Z"
+        fill="#70E206"
+      />
+      <path
+        d="M92.957 167.983L96.2427 167.34V172.742L93.3479 173.456L93.7389 171.893H90.2201L88.2652 171.111L85.9194 172.284L87.4833 169.547L89.8291 168.765L92.957 167.983Z"
+        fill="#70E206"
+      />
+      <path
+        d="M72.2352 119.111L71.0622 117.156L70.6712 118.72L69.4983 117.156L68.7164 118.72L67.9344 116.765L67.1525 118.329L66.3705 116.374L65.5885 117.547L64.8066 115.983L64.0246 117.547L63.6337 115.592L62.7427 114.742V113.742L63.2427 112.242L64.0246 110.601L65.1976 108.554L66.3705 106.99L67.9344 105.426L68.7164 104.253L69.8893 102.69L70.2803 101.517L69.8893 101.126L71.0622 99.9527L69.4983 99.1708L71.4532 97.6068L70.2803 97.2159L71.8442 96.4339L70.6712 95.652H72.6261L71.8442 93.6971L73.7991 94.479V93.6971L74.972 94.0881L75.754 93.3061L76.5359 92.9151L77.3179 92.5241H77.7088H78.8818H80.0547L82.4006 92.1332L83.9645 91.7422H85.5284L87.8743 92.5241L89.4382 93.3061L91.0021 94.87L92.175 97.6068L92.957 99.9527L93.3479 103.081L93.7389 105.035L94.5209 105.426V106.99H96.0821V133.968H95.3028L93.3479 133.577L92.175 135.141L91.3931 136.314L90.6111 137.096H88.6562H86.7013H85.5284L84.3555 137.878L83.5735 138.659L83.1825 137.878H82.4006L81.2276 138.659L80.4457 139.441L79.6637 140.614L79.2728 139.05L79.6637 137.487V137.096L80.4457 136.314L81.2276 135.923H82.7915L83.1825 135.532V134.75L83.5735 133.968H84.3555L84.7464 134.359L85.5284 134.75H86.3103L87.4833 133.968L88.6562 133.186V132.404L89.0472 131.622V130.058L88.2652 128.885L87.8743 127.321L88.2652 126.148L87.4833 125.757H85.9194L84.3555 125.366H83.1825L82.7915 124.193L82.0096 123.411L75.363 128.494L73.7991 129.667L72.2352 130.449H70.6712L69.4983 130.058L68.3254 129.667L67.5434 128.885L67.1525 127.321L67.5434 125.366L67.7427 126.242M72.2352 119.111V117.156L72.3406 117.296L73.4081 118.72L73.7991 116.765L75.363 118.72L74.972 116.374L76.1449 116.765L75.754 115.592L77.7088 116.374L76.9269 114.81H78.0998V113.637H78.8818L79.2728 114.028L79.6637 114.81L80.0547 115.592L79.6637 115.983L78.4908 117.938H77.7088L78.0998 118.72H76.9269V119.893H76.5359V121.065L74.972 120.284L75.363 121.847L74.19 121.065L74.581 123.02L73.0171 122.238L73.7991 124.193L72.2352 123.802L72.6261 125.366L71.4532 124.584V126.539L70.2803 125.757V126.93L69.4983 126.539L68.7164 127.712L68.3254 126.539L67.9344 127.712L67.7427 126.242M72.2352 119.111V119.893L71.0622 121.456L69.4983 123.02L68.3254 124.584L67.7427 126.242M96.2427 140.242L96.0821 137.558L95.6938 137.487H94.5209L93.3479 136.705H92.566H91.784L91.3931 137.487H90.2201L89.4382 138.269L88.6562 139.441V140.223L90.2201 139.441H91.3931L92.175 138.659H92.957L93.3479 139.441L92.957 140.223L92.175 140.614L91.3931 141.396L91.0021 142.178L90.2201 143.742L91.784 142.96L92.957 142.178L93.7389 141.787L94.5209 141.396L95.6938 140.614L96.2427 140.242ZM96.2427 167.34L92.957 167.983L89.8291 168.765L87.4833 169.547L85.9194 172.284L88.2652 171.111L90.2201 171.893H93.7389L93.3479 173.456L96.2427 172.742V167.34Z"
+        stroke="black"
+        stroke-width="0.781955"
+      />
+      <path
+        d="M68.3253 110.118L69.1073 109.336L69.4982 110.118V110.9L68.7163 111.682L67.9343 112.464V110.9L68.3253 110.118Z"
+        fill="#70E206"
+        stroke="black"
+        stroke-width="0.781955"
+      />
+      <path
+        d="M65.5886 110.118L65.1976 108.945L64.4156 110.9L64.0247 112.073L64.8066 111.682L65.1976 110.9L65.5886 110.118Z"
+        fill="#70E206"
+        stroke="black"
+        stroke-width="0.781955"
+      />
+      <path
+        d="M82.0095 123.41L84.3554 121.847L85.9193 119.892L86.7013 117.937L87.4832 116.373L88.2652 115.2L89.0471 114.418"
+        stroke="black"
+        stroke-width="0.781955"
+      />
+      <path
+        d="M56.2427 78.7422L53.2427 76.2422V72.2422L53.7427 70.7422L59.7427 72.7422L69.2427 73.7422L79.2427 73.7422L91.7427 72.2422L94.2427 70.7422L95.2427 74.7422V77.7422L91.7427 80.2422L87.2427 81.156L82.2427 82.1905H75.7427H69.7427L64.7427 81.7422L60.2427 80.2422L56.2427 78.7422Z"
+        fill="url(#paint3_linear_488_195)"
+      />
+      {/* Animated Elements */}
+      <path
+        id="dino-eye"
+        d="M80.0547 100.344L79.2727 101.126L80.4456 101.517H81.2276L82.0095 101.126L82.4005 100.735L82.0095 100.344L81.2276 99.9531H80.4456L80.0547 100.344Z"
+        fill="black"
+        stroke="black"
+        stroke-width="0.781955"
+      >
+        {/* Reset-Animationen for dino-eye fill */}
+        <animate
+          attributeName="fill"
+          to="black"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 1. Eye turns red */}
+        <animate
+          id="anim_eye_red"
+          attributeName="fill"
+          from="black"
+          to="#FF0404"
+          begin="1s; anim_explosion.end+54s"
+          dur="0.2s"
+          fill="freeze"
+        />
+      </path>
+      {/* Eye Lasers Group (Always Visible - Clip paths control visibility) */}
+      <g id="eye-lasers" opacity="1">
+        <path
+          id="eye-laser-1"
+          d="M53.7427 114.742L69.7427 100.742H70.7427L53.7427 121.242V114.742Z"
+          fill="#FF0404"
+          clip-path="url(#clip-path-1)"
+        />
+        <path
+          id="eye-laser-2"
+          d="M53.7427 127.242L80.2427 101.242H81.2427L53.7427 136.742V127.242Z"
+          fill="#FF0404"
+          clip-path="url(#clip-path-2)"
+        />
+        {/* Reset for clip-rect-1 width */}
+        <animate
+          xlinkHref="#clip-rect-1"
+          attributeName="width"
+          to="0"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 2. Eye laser 1 appears */}
+        <animate
+          xlinkHref="#clip-rect-1"
+          id="anim_eye_laser_1_w"
+          attributeName="width"
+          from="0"
+          to="17"
+          begin="anim_eye_red.end"
+          dur="0.3s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-1 x */}
+        <animate
+          xlinkHref="#clip-rect-1"
+          attributeName="x"
+          to="70.7"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 2. Eye laser 1 moves */}
+        <animate
+          xlinkHref="#clip-rect-1"
+          id="anim_eye_laser_1_x"
+          attributeName="x"
+          from="70.7"
+          to="53.7"
+          begin="anim_eye_red.end"
+          dur="0.3s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-2 width */}
+        <animate
+          xlinkHref="#clip-rect-2"
+          attributeName="width"
+          to="0"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 2. Eye laser 2 appears */}
+        <animate
+          xlinkHref="#clip-rect-2"
+          id="anim_eye_laser_2_w"
+          attributeName="width"
+          from="0"
+          to="27.5"
+          begin="anim_eye_red.end"
+          dur="0.3s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-2 x */}
+        <animate
+          xlinkHref="#clip-rect-2"
+          attributeName="x"
+          to="81.2"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 2. Eye laser 2 moves */}
+        <animate
+          xlinkHref="#clip-rect-2"
+          id="anim_eye_laser_2_x"
+          attributeName="x"
+          from="81.2"
+          to="53.7"
+          begin="anim_eye_red.end"
+          dur="0.3s"
+          fill="freeze"
+        />
+      </g>
+      {/* Diagonal Lasers Group (Always Visible - Clip paths control visibility) */}
+      <g id="diagonal-lasers">
+        <path
+          id="laser-3"
+          d="M53.2427 146.242L96.2427 106.742V112.242L53.2427 152.242V146.242Z"
+          fill="url(#paint0_linear_488_195)"
+          clip-path="url(#clip-path-3)"
+        />
+        <path
+          id="laser-4"
+          d="M53.2427 160.242L96.2427 120.742V126.242L53.2427 166.242V160.242Z"
+          fill="url(#paint1_linear_488_195)"
+          clip-path="url(#clip-path-4)"
+        />
+        <path
+          id="laser-5"
+          d="M69.7427 166.242L96.2427 141.742V147.242L76.7427 165.242L69.7427 166.242Z"
+          fill="url(#paint2_linear_488_195)"
+          clip-path="url(#clip-path-5)"
+        />
+        {/* Reset for clip-rect-3 width */}
+        <animate
+          xlinkHref="#clip-rect-3"
+          attributeName="width"
+          to="0"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 3. Diagonal laser 1 appears */}
+        <animate
+          xlinkHref="#clip-rect-3"
+          id="anim_laser_3_w"
+          attributeName="width"
+          from="0"
+          to="43"
+          begin="anim_eye_laser_1_w.end+0.2s"
+          dur="0.5s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-3 x */}
+        <animate
+          xlinkHref="#clip-rect-3"
+          attributeName="x"
+          to="96.2"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 3. Diagonal laser 1 moves */}
+        <animate
+          xlinkHref="#clip-rect-3"
+          id="anim_laser_3_x"
+          attributeName="x"
+          from="96.2"
+          to="53.2"
+          begin="anim_eye_laser_2_w.end+0.2s"
+          dur="0.5s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-4 width */}
+        <animate
+          xlinkHref="#clip-rect-4"
+          attributeName="width"
+          to="0"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 4. Diagonal laser 2 appears */}
+        <animate
+          xlinkHref="#clip-rect-4"
+          id="anim_laser_4_w"
+          attributeName="width"
+          from="0"
+          to="43"
+          begin="anim_laser_3_w.end"
+          dur="0.5s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-4 x */}
+        <animate
+          xlinkHref="#clip-rect-4"
+          attributeName="x"
+          to="96.2"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 4. Diagonal laser 2 moves */}
+        <animate
+          xlinkHref="#clip-rect-4"
+          id="anim_laser_4_x"
+          attributeName="x"
+          from="96.2"
+          to="53.2"
+          begin="anim_laser_3_x.end"
+          dur="0.5s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-5 width */}
+        <animate
+          xlinkHref="#clip-rect-5"
+          attributeName="width"
+          to="0"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 5. Diagonal laser 3 appears */}
+        <animate
+          xlinkHref="#clip-rect-5"
+          id="anim_laser_5_w"
+          attributeName="width"
+          from="0"
+          to="26.5"
+          begin="anim_laser_4_w.end"
+          dur="0.5s"
+          fill="freeze"
+        />
+        {/* Reset for clip-rect-5 x */}
+        <animate
+          xlinkHref="#clip-rect-5"
+          attributeName="x"
+          to="96.2"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+        {/* 5. Diagonal laser 3 moves */}
+        <animate
+          xlinkHref="#clip-rect-5"
+          id="anim_laser_5_x"
+          attributeName="x"
+          from="96.2"
+          to="69.7"
+          begin="anim_laser_4_x.end"
+          dur="0.5s"
+          fill="freeze"
+        />
+      </g>
+      {/* Explosion Group (Opacity controls visibility) */}
+      <g id="explosion" opacity="0">
+        <path
+          d="M55.478 120.742L68.4427 156.622L90.3486 133.622L76.9368 162.142L91.2427 165.362L74.2544 169.962L78.7427 181.742H74.2544L64.8662 171.342L61.7427 180.242L56.7427 177.742L58.1603 164.442L53.2427 163.982V157.082L60.3956 156.622L55.478 120.742Z"
+          fill="#F2FF00"
+        />
+        <path
+          d="M61.9699 147.742L68.3336 160.273L78.7881 150.991L71.0609 162.13L84.2427 164.8H69.2427L77.2801 182.742L65.1518 166.771L57.7186 180.034L61.5154 164.123L54.2427 160.738L63.7881 161.202L61.9699 147.742Z"
+          fill="#FFF9D0"
+        />
+        {/* 6. Explosion appears (resets to 0.5 then 1) */}
+        <animate
+          id="anim_explosion"
+          attributeName="opacity"
+          values="0; 1; 0.5; 1"
+          begin="anim_laser_5_x.end"
+          dur="0.5s"
+          fill="freeze"
+        />
+        {/* Reset for explosion opacity */}
+        <animate
+          attributeName="opacity"
+          to="0"
+          begin="anim_explosion.end+53.9s"
+          dur="0.1s"
+          fill="freeze"
+        />
+      </g>
+    </svg>
+  );
+}

@@ -1,0 +1,92 @@
+import React from 'react';
+
+export default function ConvertedSVG() {
+  return (
+    <svg width="150" height="249" viewBox="0 0 150 249" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+        {/* Original-Elemente der Tasse */}
+        <path d="M62.2769 164.878L42.6079 85H117L94.4929 164.878H62.2769Z" fill="white" stroke="black" strokeWidth="0.88263" />
+        <path d="M92.7276 155.609H64.0422L50.8027 99.5625H107.291L92.7276 155.609Z" fill="url(#paint0_linear_488_380)" stroke="black" strokeWidth="0.88263" />
+        <mask id="path-3-inside-1_488_380" fill="white">
+            <path d="M36.6807 103.098C44.2363 103.098 50.3612 109.223 50.3613 116.778C50.3613 124.334 44.2363 130.459 36.6807 130.459C29.125 130.459 23 124.334 23 116.778C23.0001 109.223 29.1251 103.098 36.6807 103.098ZM37.0713 108.569C32.3221 108.57 28.4727 112.42 28.4727 117.169C28.4728 121.918 32.3222 125.767 37.0713 125.768C41.8205 125.768 45.6708 121.918 45.6709 117.169C45.6709 112.42 41.8206 108.569 37.0713 108.569Z" />
+        </mask>
+        <path d="M36.6807 103.098C44.2363 103.098 50.3612 109.223 50.3613 116.778C50.3613 124.334 44.2363 130.459 36.6807 130.459C29.125 130.459 23 124.334 23 116.778C23.0001 109.223 29.1251 103.098 36.6807 103.098ZM37.0713 108.569C32.3221 108.57 28.4727 112.42 28.4727 117.169C28.4728 121.918 32.3222 125.767 37.0713 125.768C41.8205 125.768 45.6708 121.918 45.6709 117.169C45.6709 112.42 41.8206 108.569 37.0713 108.569Z" fill="white" />
+        <path d="M36.6807 103.098V102.215H36.6807L36.6807 103.098ZM50.3613 116.778H51.244V116.778L50.3613 116.778ZM36.6807 130.459L36.6807 131.342H36.6807V130.459ZM23 116.778L22.1174 116.778V116.778H23ZM37.0713 108.569V107.687L37.0713 107.687L37.0713 108.569ZM28.4727 117.169H27.59L27.59 117.169L28.4727 117.169ZM37.0713 125.768L37.0713 126.65H37.0713V125.768ZM45.6709 117.169L46.5535 117.169V117.169H45.6709ZM36.6807 103.098V103.98C43.7488 103.98 49.4786 109.71 49.4787 116.778L50.3613 116.778L51.244 116.778C51.2438 108.735 44.7237 102.215 36.6807 102.215V103.098ZM50.3613 116.778H49.4787C49.4787 123.847 43.7489 129.576 36.6807 129.576V130.459V131.342C44.7238 131.342 51.244 124.821 51.244 116.778H50.3613ZM36.6807 130.459L36.6807 129.576C29.6125 129.576 23.8826 123.846 23.8826 116.778H23H22.1174C22.1174 124.821 28.6376 131.342 36.6807 131.342L36.6807 130.459ZM23 116.778L23.8826 116.778C23.8827 109.71 29.6126 103.98 36.6807 103.98L36.6807 103.098L36.6807 102.215C28.6376 102.215 22.1175 108.735 22.1174 116.778L23 116.778ZM37.0713 108.569L37.0713 107.687C31.8346 107.687 27.59 111.932 27.59 117.169H28.4727H29.3553C29.3553 112.907 32.8097 109.452 37.0713 109.452L37.0713 108.569ZM28.4727 117.169L27.59 117.169C27.5902 122.405 31.8348 126.65 37.0713 126.65L37.0713 125.768L37.0713 124.885C32.8097 124.885 29.3554 121.431 29.3553 117.169L28.4727 117.169ZM37.0713 125.768V126.65C42.3078 126.65 46.5534 122.406 46.5535 117.169L45.6709 117.169L44.7883 117.169C44.7882 121.431 41.3331 124.885 37.0713 124.885V125.768ZM45.6709 117.169H46.5535C46.5535 111.932 42.308 107.687 37.0713 107.687V108.569V109.452C41.3331 109.452 44.7883 112.907 44.7883 117.169H45.6709Z" fill="black" mask="url(#path-3-inside-1_488_380)" />
+    
+        {/* Der animierte Zuckerwürfel */}
+        <g id="zuckerwuerfel" transform="rotate(45)">
+            <rect x="-6.5" y="-6.5" width="13" height="13" fill="white" stroke="black" strokeWidth="0.8">
+                {/* Änderung: Der Würfel färbt sich nun stärker rotbraun */}
+                <animate 
+                    attributeName="fill"
+                    from="white"
+                    to="#B5654C"
+                    begin="1.5s"
+                    dur="3.8s"
+                    fill="freeze" />
+            </rect>
+            
+            {/* Phase 1: Freier Fall */}
+            <animateMotion
+                path="M 79, -40 L 79, 90.4"
+                dur="1.5s"
+                begin="0s"
+                calcMode="spline"
+                keySplines="0.4 0 1 1"
+                fill="freeze" />
+            
+            {/* Phase 2.1: Schnelleres Eintauchen */}
+            <animateMotion
+                path="M 79, 90.4 L 79, 108.8"
+                dur="0.8s"
+                begin="1.5s"
+                fill="freeze" />
+    
+            {/* Phase 2.2: Langsames Sinken */}
+            <animateMotion
+                path="M 79, 108.8 L 79, 149.1"
+                dur="3.0s"
+                begin="2.3s"
+                calcMode="spline"
+                keySplines="0 0 0.6 1"
+                fill="freeze" />
+            
+            {/* Rotation während des Eintauchens */}
+            <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="45"
+                to="31"
+                begin="1.5s"
+                dur="0.8s"
+                fill="freeze" />
+            
+            {/* Rotation während des langsamen Sinkens */}
+            <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="31"
+                to="0"
+                begin="2.3s"
+                dur="3.0s"
+                fill="freeze" />
+    
+            {/* Auflösen beginnt, wenn der Würfel den Grund erreicht hat (5.3s) */}
+            <animate 
+                attributeName="opacity" 
+                from="1" 
+                to="0" 
+                begin="5.3s" 
+                dur="4s" 
+                fill="freeze" />
+        </g>
+    
+        <defs>
+            {/* Original-Farbverlauf für die Flüssigkeit */}
+            <linearGradient id="paint0_linear_488_380" x1="78.6056" y1="99.5625" x2="78.6056" y2="155.609" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#DA4C2B" />
+                <stop offset="0.399038" />
+            </linearGradient>
+        </defs>
+    </svg>
+  );
+}

@@ -1,0 +1,384 @@
+import React, { useState, useEffect } from 'react';
+// NEW V2: Physical carousel with iOS-style wheel and improved tap timing
+import DrinkCarouselV2 from './components/DrinkCarouselV2';
+// LEGACY: Old carousel (can be deleted once V2 is stable)
+// import SimpleCarousel from './components/SimpleCarousel';
+import StartScreen from './components/StartScreen';
+import StationDisplay from './components/StationDisplay';
+import { usePhysicalCarousel } from './hooks/usePhysicalCarousel';
+// LEGACY: Old carousel hook (can be deleted once V2 is stable)
+// import { useSimpleCarousel } from './hooks/useSimpleCarousel';
+import { useSimplePlayer } from './hooks/useSimplePlayer';
+import { useUserInteraction } from './hooks/useUserInteraction';
+import { useTheme } from './hooks/useTheme';
+import { useSleepTimer } from './hooks/useSleepTimer';
+import { useMediaSession } from './hooks/useMediaSession';
+import { DRINK_REGISTRY, getDrinkStationConfig } from './constants/drinks';
+import { APP_VERSION } from './constants/app';
+import { initMobileDebugging } from './utils/mobileDebug';
+
+/**
+ * JUICEBOX APP v16.1 - RACE CONDITION FIX
+ * 
+ * Core Mechanics:
+ * 1. Carousel V2: Two modes
+ *    - SWIPE: iOS-style wheel with physics and momentum
+ *    - TAP: Immediate state changes with smooth spring animations
+ * 2. Player: Tap active center = mute, Tap passive center = activate
+ * 3. Station Display: Smart animations for active/upcoming stations
+ * 
+ * v16.1 Changes (Critical Bug Fix):
+ * - Fixed startup loading race condition using ref instead of state
+ * - userInteractedRef provides synchronous access (no closure issues)
+ * - activateDrink no longer has userInteracted in dependency array
+ * - First drink now reliably loads on startup screen swipe
+ * 
+ * v12.6 Changes:
+ * - New StationDisplay component with smart animations
+ * - Typing animation for upcoming station changes
+ * - Snap-in animation for active station changes
+ * - Pulsing for loading states
+ * - Opacity states for playing/paused
+ */
+
+export default function App() {
+  const { userInteracted, userInteractedRef, setUserInteracted } = useUserInteraction(null);
+  const { isDarkMode } = useTheme();
+  
+  // Start screen
+  const [showStartScreen, setShowStartScreen] = useState(true);
+  
+  // Track which drink is loading
+  const [loadingDrinkIndex, setLoadingDrinkIndex] = useState<number | null>(null);
+  
+  // Hint for passive drinks
+  const [showTapHint, setShowTapHint] = useState(false);
+
+  // Player (one audio element, simple)
+  // ✅ v16.1: Pass ref instead of state to fix race condition
+  const {
+    activeDrinkIndex,
+    isLoading,
+    isMuted,
+    isPlaying,
+    currentStation,
+    activateDrink,
+    toggleMute
+  } = useSimplePlayer(userInteractedRef);
+
+  // Carousel V2 (physical interactions with continuous animation)
+  const {
+    centerIndex,
+    centerIndexRef, // ✅ FIX: Get ref for synchronous access
+    isAnimating,
+    swipeLeft,
+    swipeRight,
+    navigateTo,
+    handleSwipeEnd
+  } = usePhysicalCarousel({
+    totalDrinks: DRINK_REGISTRY.length,
+    onCenterDrinkStable: (index) => {
+      console.log(`🎠 Carousel stable at drink ${index}`);
+      // Could trigger preloading here if needed
+    }
+  });
+
+  // Sleep Timer (for drinks with sleep functionality)
+  const sleepTimer = useSleepTimer({
+    activeDrinkIndex,
+    isPlaying: isPlaying && !isMuted,
+    onSleepTimerComplete: () => {
+      console.log('🌙 Sleep timer completed, fading out and stopping...');
+      toggleMute(); // Mute the drink (which shows it as paused/grayed out)
+    }
+  });
+
+  // Media Session API for iOS Lock Screen controls
+  useMediaSession({
+    currentStation,
+    activeDrinkIndex,
+    isPlaying,
+    isMuted,
+    onPlay: () => {
+      // Only unmute if we have an active drink
+      if (activeDrinkIndex !== null && isMuted) {
+        toggleMute();
+      }
+    },
+    onPause: () => {
+      // Only mute if we have an active drink
+      if (activeDrinkIndex !== null && !isMuted) {
+        toggleMute();
+      }
+    },
+    onNextTrack: async () => {
+      // Skip to next station
+      const totalDrinks = DRINK_REGISTRY.length;
+      const nextIndex = (centerIndex + 1) % totalDrinks;
+      
+      console.log(`📱 Media Session: Skipping to next station (${nextIndex})`);
+      
+      // Swipe right (which centers the next drink)
+      swipeRight();
+      
+      // Wait for animation to complete
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Activate the new centered drink
+      if (userInteracted) {
+        setLoadingDrinkIndex(nextIndex);
+        await activateDrink(nextIndex);
+        setLoadingDrinkIndex(null);
+      }
+    },
+    onPreviousTrack: async () => {
+      // Skip to previous station
+      const totalDrinks = DRINK_REGISTRY.length;
+      const prevIndex = (centerIndex - 1 + totalDrinks) % totalDrinks;
+      
+      console.log(`📱 Media Session: Skipping to previous station (${prevIndex})`);
+      
+      // Swipe left (which centers the previous drink)
+      swipeLeft();
+      
+      // Wait for animation to complete
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Activate the new centered drink
+      if (userInteracted) {
+        setLoadingDrinkIndex(prevIndex);
+        await activateDrink(prevIndex);
+        setLoadingDrinkIndex(null);
+      }
+    }
+  });
+
+  // iOS Audio Preparation - called during user gesture
+  const handleFirstSwipe = async () => {
+    console.log('📱 iOS: First swipe - preparing audio context');
+    // ✅ v16.1: setUserInteracted now updates both ref (sync) and state (async)
+    setUserInteracted(true);
+    
+    // iOS FIX: Start loading first drink IMMEDIATELY during user gesture
+    // This is critical for iOS Safari - audio must start during user interaction
+    setLoadingDrinkIndex(0);
+    
+    // Start loading the first drink in the background
+    // This happens during the swipe gesture, so iOS allows it
+    // ✅ v16.1: activateDrink now checks userInteractedRef.current (always current!)
+    try {
+      await activateDrink(0);
+      // Clear loading state after successful activation
+      setLoadingDrinkIndex(null);
+      console.log('✅ First drink loaded and loading state cleared');
+    } catch (error) {
+      console.error('❌ iOS: Failed to preload first drink:', error);
+      setLoadingDrinkIndex(null);
+    }
+  };
+
+  // Handle start screen completion
+  const handleStartScreenComplete = async () => {
+    console.log('🚀 Start screen completed');
+    setShowStartScreen(false);
+    
+    // Note: First drink is already loading from handleFirstSwipe
+    // Just clear loading state if it's done
+    if (activeDrinkIndex === 0) {
+      setLoadingDrinkIndex(null);
+    }
+  };
+
+  // Handle center drink tap
+  const handleCenterTap = async () => {
+    // Don't allow center tap during animation (swipes should work, but not center tap)
+    if (isAnimating) {
+      console.log('⚠️ Center tap ignored (carousel animating)');
+      return;
+    }
+    
+    // Hide hint immediately on tap
+    setShowTapHint(false);
+    
+    // ✅ FIX: Use ref instead of state to avoid race condition on Windows
+    // The ref is updated synchronously, while state updates are batched
+    // This fixes the bug where clicking fast shows music from previous glass
+    const currentCenterIndex = centerIndexRef.current;
+    
+    // Case 1: Active drink is centered → Toggle mute
+    if (currentCenterIndex === activeDrinkIndex) {
+      console.log('👆 Tapped active center drink → Toggle mute');
+      toggleMute();
+      return;
+    }
+
+    // Case 2: Passive drink is centered → Activate it
+    if (currentCenterIndex !== activeDrinkIndex && userInteracted) {
+      console.log(`👆 Tapped passive center drink ${currentCenterIndex} → Activate`);
+      setLoadingDrinkIndex(currentCenterIndex);
+      await activateDrink(currentCenterIndex);
+      setLoadingDrinkIndex(null);
+      return;
+    }
+
+    console.log('⚠️ Center tap ignored (not ready)');
+  };
+
+  // Initialize mobile debugging
+  useEffect(() => {
+    initMobileDebugging();
+  }, []);
+
+  // PWA status bar color - Update theme-color meta tag dynamically
+  useEffect(() => {
+    const statusBarColor = isDarkMode ? '#9C9C9C' : '#F1F1F1';
+    
+    // Update theme-color meta tag (Android and some iOS contexts)
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement;
+    if (themeColorMeta) {
+      themeColorMeta.content = statusBarColor;
+    }
+    
+    // For iOS, also update the status bar style dynamically
+    // Note: This only works in Safari, not in installed PWAs (they cache the initial value)
+    const appleStatusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]') as HTMLMetaElement;
+    if (appleStatusBarMeta) {
+      // Use 'default' which shows content color behind status bar
+      appleStatusBarMeta.content = 'default';
+    }
+    
+    console.log(`📱 PWA: Updated theme-color to ${statusBarColor} (${isDarkMode ? 'dark' : 'light'} mode)`);
+  }, [isDarkMode]);
+
+  // Show "tap to play" hint for passive centered drinks after 3 seconds
+  useEffect(() => {
+    // Reset hint immediately when conditions change
+    setShowTapHint(false);
+    
+    // Don't show hint if:
+    // - Start screen is visible
+    // - Currently animating
+    // - Drink is loading
+    // - Center drink is already active
+    if (showStartScreen || isAnimating || isLoading || centerIndex === activeDrinkIndex) {
+      return;
+    }
+    
+    // Center drink is passive → Start 3-second timer
+    const timer = setTimeout(() => {
+      console.log('💡 Showing tap hint for passive centered drink');
+      setShowTapHint(true);
+    }, 3000);
+    
+    return () => {
+      clearTimeout(timer);
+      setShowTapHint(false);
+    };
+  }, [centerIndex, activeDrinkIndex, isAnimating, isLoading, showStartScreen]);
+
+  // Debug logging
+  useEffect(() => {
+    console.log('🎛️ STATE:', {
+      center: centerIndex,
+      active: activeDrinkIndex,
+      animating: isAnimating,
+      loading: isLoading,
+      playing: isPlaying,
+      muted: isMuted,
+      tapHint: showTapHint
+    });
+  }, [centerIndex, activeDrinkIndex, isAnimating, isLoading, isPlaying, isMuted, showTapHint]);
+
+  return (
+    <div className={`w-screen h-screen overflow-hidden relative ${isDarkMode ? 'dark' : ''}`}>
+      {/* Background */}
+      <div className="absolute inset-0 bg-background transition-colors duration-300" />
+
+      {/* Start Screen */}
+      {showStartScreen && (
+        <StartScreen
+          onComplete={handleStartScreenComplete}
+          onFirstSwipe={handleFirstSwipe}
+          userInteracted={userInteracted}
+          isFirstStationLoading={isLoading && loadingDrinkIndex === 0}
+        />
+      )}
+
+      {/* Main App */}
+      {!showStartScreen && (
+        <div className="relative w-full h-full flex flex-col">
+          {/* Station Display - Centered at top */}
+          <StationDisplay
+            activeStation={
+              activeDrinkIndex !== null 
+                ? getDrinkStationConfig(DRINK_REGISTRY[activeDrinkIndex].id)?.name || null
+                : null
+            }
+            upcomingStation={
+              centerIndex !== activeDrinkIndex
+                ? getDrinkStationConfig(DRINK_REGISTRY[centerIndex].id)?.name || null
+                : null
+            }
+            isPlaying={isPlaying && !isMuted}
+            isLoading={isLoading && loadingDrinkIndex === activeDrinkIndex}
+            upcomingIsLoading={isLoading && loadingDrinkIndex === centerIndex}
+          />
+
+          {/* Carousel V2 - Absolutely centered, independent of header/footer */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-full h-full flex items-center justify-center pointer-events-auto">
+              <DrinkCarouselV2
+                centerIndex={centerIndex}
+                isAnimating={isAnimating}
+                activeDrinkIndex={activeDrinkIndex}
+                loadingDrinkIndex={loadingDrinkIndex}
+                isMuted={isMuted}
+                totalDrinks={DRINK_REGISTRY.length}
+                onSwipeLeft={swipeLeft}
+                onSwipeRight={swipeRight}
+                onSwipeEnd={handleSwipeEnd}
+                onNavigateTo={navigateTo}
+                onCenterTap={handleCenterTap}
+              />
+            </div>
+          </div>
+
+          {/* Hints below carousel (Tap Hint / Sleep Timer) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="flex flex-col items-center justify-center">
+              {/* Spacer for carousel height + 140px distance */}
+              <div style={{ height: '90px' }} />
+              
+              {/* Hint Area - 140px below drink */}
+              <div className="h-[30px] flex items-center justify-center" style={{ marginTop: '140px' }}>
+                {/* Sleep Timer */}
+                {sleepTimer.isActive && (
+                  <div 
+                    className="font-['Pathway_Extreme',sans-serif] text-[11px] text-nowrap text-[#9c9c9c] dark:text-[#CBCBCB] tabular-nums"
+                    style={{ fontVariationSettings: "'wdth' 100", opacity: 0.5 }}
+                  >
+                    {Math.floor(sleepTimer.remainingSeconds / 60)}:{String(sleepTimer.remainingSeconds % 60).padStart(2, '0')}
+                  </div>
+                )}
+                
+                {/* Tap Hint - strong pulse from 0% to 40% */}
+                {showTapHint && (
+                  <div 
+                    className="font-['Pathway_Extreme',sans-serif] text-[11px] text-nowrap text-[#9c9c9c] dark:text-[#CBCBCB]"
+                    style={{
+                      fontVariationSettings: "'wdth' 100",
+                      opacity: 0.5,
+                      animation: 'strongPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    }}
+                  >
+                    tap drink to play
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

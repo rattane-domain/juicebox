@@ -1,0 +1,10 @@
+import React from 'react';
+
+export default function ConvertedSVG() {
+  return (
+    <svg width="150" height="250" viewBox="0 0 150 250" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+    <path d="M41.3208 113L39.8208 105.5L38.3208 100L37.8208 91.5H106.821L105.821 100L104.821 105.5L103.321 110.5L101.321 114.5L98.3208 117.5L94.3208 120.5L91.8208 121.5V128.5L90.3208 134.5L84.8208 138L76.8208 139H69.8208H64.3208L58.8208 138L54.8208 134.5L53.3208 128.5V123L47.8208 120.5L43.8208 117.5L41.3208 113Z" fill="white" stroke="black" />
+    <path d="M75.8208 175.5V139H69.8208V175.5V177.5L68.8208 180.5L67.3208 182.5L63.8208 184L59.8208 185L50.8208 188.5V191H95.8208V188.5L84.8208 185L80.8208 184L78.3208 182.5L76.8208 180.5L75.8208 177.5V175.5Z" fill="white" stroke="black" />
+    </svg>
+  );
+}

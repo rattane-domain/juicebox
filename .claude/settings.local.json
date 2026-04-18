@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(git --version)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh auth *)",
+      "Bash(git -C \"/Users/maurice/Documents/M Dokumente/M Projects/Juicebox \" init)",
+      "Bash(git -C \"/Users/maurice/Documents/M Dokumente/M Projects/Juicebox \" remote add origin https://github.com/rattane-domain/juicebox.git)",
+      "Bash(git -C \"/Users/maurice/Documents/M Dokumente/M Projects/Juicebox \" remote -v)"
+    ]
+  }
+}
