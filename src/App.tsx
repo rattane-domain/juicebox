@@ -4,6 +4,7 @@ import DrinkCarouselV2 from './components/DrinkCarouselV2';
 // LEGACY: Old carousel (can be deleted once V2 is stable)
 // import SimpleCarousel from './components/SimpleCarousel';
 import StartScreen from './components/StartScreen';
+import PasswordGate from './components/PasswordGate';
 import StationDisplay from './components/StationDisplay';
 import { usePhysicalCarousel } from './hooks/usePhysicalCarousel';
 // LEGACY: Old carousel hook (can be deleted once V2 is stable)
@@ -45,6 +46,9 @@ export default function App() {
   const { userInteracted, userInteractedRef, setUserInteracted } = useUserInteraction(null);
   const { isDarkMode } = useTheme();
   
+  // Password gate (disabled if no VITE_PASSWORD env var set)
+  const [unlocked, setUnlocked] = useState(!import.meta.env.VITE_PASSWORD);
+
   // Start screen
   const [showStartScreen, setShowStartScreen] = useState(true);
 
@@ -302,6 +306,10 @@ export default function App() {
       tapHint: showTapHint
     });
   }, [centerIndex, activeDrinkIndex, isAnimating, isLoading, isPlaying, isMuted, showTapHint]);
+
+  if (!unlocked) {
+    return <PasswordGate onUnlock={() => setUnlocked(true)} />;
+  }
 
   return (
     <div className={`w-screen h-screen overflow-hidden relative ${isDarkMode ? 'dark' : ''}`}>
