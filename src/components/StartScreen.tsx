@@ -93,33 +93,44 @@ export const StartScreen: React.FC<StartScreenProps> = ({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
-      {/* Sticker - top left */}
+      {/* Sticker group - top left */}
       <div
         className="absolute"
         style={{
-          top: '20px',
-          left: '-30px',
-          width: '290px',
-          height: '210px',
-          transform: 'rotate(-12deg)',
-          opacity: 0.95
-        }}
-      >
-        <UpdateStickerV16 />
-      </div>
-
-      {/* New sticker - overlaid slightly rotated */}
-      <div
-        className="absolute"
-        style={{
-          top: '10px',
+          top: '0px',
           left: '-10px',
-          width: '260px',
-          height: '163px',
-          transform: 'rotate(-7deg)',
+          width: '203px',
+          height: '147px',
         }}
       >
-        <img src="/sticker.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        {/* Old sticker */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '20px',
+            left: '0px',
+            width: '203px',
+            height: '147px',
+            transform: 'rotate(-12deg)',
+            opacity: 0.95
+          }}
+        >
+          <UpdateStickerV16 />
+        </div>
+
+        {/* New sticker */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '14px',
+            width: '182px',
+            height: '114px',
+            transform: 'rotate(-7deg)',
+          }}
+        >
+          <img src="/sticker.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        </div>
       </div>
 
       {/* Version - top right */}
