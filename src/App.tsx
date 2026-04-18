@@ -412,30 +412,7 @@ export default function App() {
         </button>
       )}
 
-      {/* View Toggle Button (bottom-left) */}
-      {!showStartScreen && (
-        <button
-          className="fixed left-6 bottom-8 z-50 text-[#9c9c9c] dark:text-[#CBCBCB] pointer-events-auto"
-          style={{ lineHeight: 0, padding: '16px' }}
-          onClick={() => setViewMode(v => v === 'carousel' ? 'grid' : 'carousel')}
-          aria-label="View wechseln"
-        >
-          {viewMode === 'carousel' ? (
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 12 0)" fill="currentColor"/>
-              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 4 0)" fill="currentColor"/>
-              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 12 8)" fill="currentColor"/>
-              <circle cx="2" cy="2" r="2" transform="matrix(-1 0 0 1 4 8)" fill="currentColor"/>
-            </svg>
-          ) : (
-            <svg width="20" height="4" viewBox="0 0 20 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="2" cy="2" r="2" fill="currentColor"/>
-              <circle cx="10" cy="2" r="2" fill="currentColor"/>
-              <circle cx="18" cy="2" r="2" fill="currentColor"/>
-            </svg>
-          )}
-        </button>
-      )}
+      {/* View Toggle Button — disabled, see DrinkGridView.tsx to re-enable */}
 
       {/* Main App */}
       {!showStartScreen && (
@@ -457,14 +434,14 @@ export default function App() {
             upcomingIsLoading={isLoading && loadingDrinkIndex === centerIndex}
           />
 
-          {/* Grid View (experiment) — remove this block to disable */}
-          {viewMode === 'grid' && (
+          {/* Grid View — disabled, re-enable by restoring toggle button and this block */}
+          {/* {viewMode === 'grid' && (
             <DrinkGridView
               activeDrinkIndex={activeDrinkIndex}
               isMuted={isMuted}
               onDrinkTap={handleGridTap}
             />
-          )}
+          )} */}
 
           {/* Carousel V2 - Absolutely centered, independent of header/footer */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ display: viewMode === 'grid' ? 'none' : 'flex' }}>
