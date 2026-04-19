@@ -38,21 +38,30 @@ export const useMediaSession = ({
     if (currentStation && activeDrinkIndex !== null) {
       const drink = DRINK_REGISTRY[activeDrinkIndex];
 
-      // iOS/WebKit ignores relative artwork URLs — always use absolute.
+      // iOS/WebKit ignores relative artwork URLs and also silently falls back
+      // to the favicon if the artwork isn't in the browser cache when metadata
+      // is read. Force-load the image first, then set metadata.
       const origin = window.location.origin;
+      const artworkUrl = `${origin}/artwork.png`;
+      const largeUrl = `${origin}/icon-512x512.png`;
 
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: drink.displayName,
-        artist: currentStation.name,
-        album: 'Juicebox Radio',
-        artwork: [
-          { src: `${origin}/artwork.png`, sizes: '192x192', type: 'image/png' },
-          { src: `${origin}/icon-192x192.png`, sizes: '192x192', type: 'image/png' },
-          { src: `${origin}/icon-512x512.png`, sizes: '512x512', type: 'image/png' }
-        ]
-      });
+      const setMetadata = () => {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: drink.displayName,
+          artist: currentStation.name,
+          album: 'Juicebox Radio',
+          artwork: [
+            { src: artworkUrl, sizes: '192x192', type: 'image/png' },
+            { src: largeUrl, sizes: '512x512', type: 'image/png' }
+          ]
+        });
+        console.log(`📱 Media Session: Updated metadata for ${drink.displayName} - ${currentStation.name}`);
+      };
 
-      console.log(`📱 Media Session: Updated metadata for ${drink.displayName} - ${currentStation.name}`);
+      const preloader = new Image();
+      preloader.onload = setMetadata;
+      preloader.onerror = setMetadata;
+      preloader.src = artworkUrl;
     } else {
       // Clear metadata when nothing is playing
       navigator.mediaSession.metadata = null;
