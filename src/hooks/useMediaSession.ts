@@ -37,18 +37,21 @@ export const useMediaSession = ({
 
     if (currentStation && activeDrinkIndex !== null) {
       const drink = DRINK_REGISTRY[activeDrinkIndex];
-      
-      // Update metadata for Lock Screen display
+
+      // iOS/WebKit ignores relative artwork URLs — always use absolute.
+      const origin = window.location.origin;
+
       navigator.mediaSession.metadata = new MediaMetadata({
         title: drink.displayName,
         artist: currentStation.name,
         album: 'Juicebox Radio',
         artwork: [
-          { src: '/artwork.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
+          { src: `${origin}/artwork.png`, sizes: '192x192', type: 'image/png' },
+          { src: `${origin}/icon-192x192.png`, sizes: '192x192', type: 'image/png' },
+          { src: `${origin}/icon-512x512.png`, sizes: '512x512', type: 'image/png' }
         ]
       });
-      
+
       console.log(`📱 Media Session: Updated metadata for ${drink.displayName} - ${currentStation.name}`);
     } else {
       // Clear metadata when nothing is playing
