@@ -164,8 +164,24 @@ export const useSimplePlayer = (userInteractedRef: React.RefObject<boolean>) => 
       // Start new audio
       newAudio.volume = 1;
       newAudio.muted = false;
-      
-      // iOS FIX: Add detailed error logging
+
+      // Set MediaSession metadata BEFORE play() so the Lock Screen widget
+      // captures the correct artwork when it initializes. iOS freezes the
+      // Lock Screen artwork at the moment play() is called — if metadata
+      // isn't set yet, it falls back to the cached favicon.
+      if ('mediaSession' in navigator) {
+        const origin = window.location.origin;
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: drink.displayName,
+          artist: stationConfig.name,
+          album: 'Juicebox Radio',
+          artwork: [
+            { src: `${origin}/artwork.png`, sizes: '192x192', type: 'image/png' },
+            { src: `${origin}/icon-512x512.png`, sizes: '512x512', type: 'image/png' }
+          ]
+        });
+      }
+
       try {
         await newAudio.play();
         console.log(`📱 iOS: Successfully started playback for ${drink.displayName}`);
